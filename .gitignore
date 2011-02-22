@@ -1,0 +1,14 @@
+# Xcode noise
+build
+*.pbxuser
+*.mode1v3
+*.mode2v3
+
+# Subversion
+.svn
+
+# OS X noise
+.DS_Store
+
+# Ignore TouchJSON in this project - no need to confuse things
+TouchJSON

@@ -1,0 +1,47 @@
+# ILGeoNames
+
+ILGeoNames provides Objective C wrapper classes for accessing the free geocoding services at [GeoNames.org]("http://www.geonames.org") from iOS.
+
+Unlike the geocoding services provided by Google which have various restricting license terms, GeoNames allows you to use their data for practically any purpose as long as you give [proper credit]("http://www.geonames.org/export/").
+
+## Setting up the sample application
+
+In order to be able to use this sample application you need to perform a few additional steps first:
+
+- Sign up for a free account a geonames.org
+- Enter your new geonames account information in SampleAppDelegate.m
+- Download TouchJSON
+
+Each of these steps are detailed in more details below.
+
+### Sign up for a free GeoNames account
+
+If you do not already have an account with GeoNames, you first need to go to http://www.geonames.org/login and sign-up for a free account. Shortly after you should get an confirmation email with information on how to activate your account.
+
+Once you have activated your account you also need to enable it to use the free web service. This is done from your GeoNames account page by simply clicking a link. Once enabled, your account is ready to be used with the various geocoding services.
+
+### Setting up account information
+
+Open the SampleApp.xcodeproj file and locate the file named `SampleAppDelegate.m`
+Locate the following line near the top of the file and replace the account information with your own.
+
+	static NSString *kGeoNamesAccountName = @"ilgeonamessample";
+
+### Download TouchJSON
+
+The ILGeoNames classes makes use of TouchJSON by Jonathan Wight. In order to be able to build the sample project - and your own for that matter - you need to download a copy of the TouchJSON code from [GitHub]("http://github.com/TouchCode/TouchJSON")
+
+Once downloaded, place the TouchJSON folder next to the SampleApp folder. Alternatively, if you already have your own fork of TouchJSON, just point the sample project to your local repository.
+ 
+You should now be ready to compile and run the sample application. The application shows examples on how to use the following classes:
+
+- ILGeoNamesLookup, the basic wrapper for accessing geonames.org
+- ILGeoNamesSearchController, a search controller for online search of named locations
+
+
+Feel free to add enhanchements, bug fixes, changes and provide them back to the community!
+
+Thanks,
+
+Claus Broch
+http://www.infinite-loop.dk

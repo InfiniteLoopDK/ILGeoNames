@@ -1,0 +1,13 @@
+/* 
+   ILGeoNames.strings
+
+   Created by Claus Broch on 28/06/10.
+   Copyright 2010 Infinite Loop. All rights reserved.
+ */
+
+
+"ILGEONAMES_UNKNOWN_LOOKUP_ERR" = "Failed to lookup place name for location";
+"ILGEONAMES_SEARCH_ERR" = "An error occured.";
+"ILGEONAMES_SEARCH_PROMPT" = "Type the Place, State and/or Country:";
+"ILGEONAMES_SEARCHING" = "Searching...";
+"ILGEONAMES_NO_RESULTS" = "No results found.";
