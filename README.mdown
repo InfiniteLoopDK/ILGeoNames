@@ -1,8 +1,8 @@
 # ILGeoNames
 
-ILGeoNames provides Objective C wrapper classes for accessing the free geocoding services at [GeoNames.org]("http://www.geonames.org") from iOS.
+ILGeoNames provides Objective C wrapper classes for accessing the free geocoding services at [GeoNames.org](http://www.geonames.org) from iOS.
 
-Unlike the geocoding services provided by Google which have various restricting license terms, GeoNames allows you to use their data for practically any purpose as long as you give [proper credit]("http://www.geonames.org/export/").
+Unlike the geocoding services provided by Google which have various restricting license terms, GeoNames allows you to use their data for practically any purpose as long as you give [proper credit](http://www.geonames.org/export/).
 
 ## Setting up the sample application
 
@@ -29,7 +29,7 @@ Locate the following line near the top of the file and replace the account infor
 
 ### Download TouchJSON
 
-The ILGeoNames classes makes use of TouchJSON by Jonathan Wight. In order to be able to build the sample project - and your own for that matter - you need to download a copy of the TouchJSON code from [GitHub]("http://github.com/TouchCode/TouchJSON")
+The ILGeoNames classes makes use of TouchJSON by Jonathan Wight. In order to be able to build the sample project - and your own for that matter - you need to download a copy of the TouchJSON code from [GitHub](http://github.com/TouchCode/TouchJSON)
 
 Once downloaded, place the TouchJSON folder next to the SampleApp folder. Alternatively, if you already have your own fork of TouchJSON, just point the sample project to your local repository.
  
@@ -38,10 +38,12 @@ You should now be ready to compile and run the sample application. The applicati
 - ILGeoNamesLookup, the basic wrapper for accessing geonames.org
 - ILGeoNamesSearchController, a search controller for online search of named locations
 
+For more information about ILGeoNames and how to use it, please visit http://www.infinite-loop.dk/developer/ilgeonames/
+
 
 Feel free to add enhanchements, bug fixes, changes and provide them back to the community!
+
 
 Thanks,
 
 Claus Broch
-http://www.infinite-loop.dk
