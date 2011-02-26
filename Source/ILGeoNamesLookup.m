@@ -170,10 +170,10 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	}
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(geoNamesLookup:didFindGeoNames:totalFound:)]) {
 		
-		NSArray *geoNames = [result objectForKey:@"geonames"];
+		NSArray *geoNames = [result objectForKey:kILGeoNamesResultsKey];
 		NSUInteger total = [geoNames count];
-		if([result objectForKey:@"totalResultsCount"])
-			total = [[result objectForKey:@"totalResultsCount"] intValue];
+		if([result objectForKey:kILGeoNamesTotalResultsCountKey])
+			total = [[result objectForKey:kILGeoNamesTotalResultsCountKey] intValue];
 		
         [self.delegate geoNamesLookup:self didFindGeoNames:geoNames totalFound:total];
 	}
@@ -214,7 +214,7 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	done = YES;
 	
     [self performSelectorOnMainThread:@selector(parseError:) withObject:error waitUntilDone:NO];
-    NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
+    NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -227,16 +227,17 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 		resultDict = [[CJSONDeserializer deserializer] deserializeAsDictionary:dataBuffer error:&error];
 	}
 	if(resultDict) {
-		NSArray *geoNames = [resultDict objectForKey:@"geonames"];
+		NSArray *geoNames = [resultDict objectForKey:kILGeoNamesResultsKey];
 		
 		if (geoNames) {
 			[self performSelectorOnMainThread:@selector(parseEnded:) withObject:resultDict waitUntilDone:NO];
 		} 
 		else {
-			NSDictionary *status = [resultDict objectForKey:@"status"];
+			NSDictionary *status = [resultDict objectForKey:kILGeoNamesErrorResponseKey];
 			if (status) {
-				NSString	*message = [status objectForKey:@"message"];
-				NSString	*value = [status objectForKey:@"value"];
+				// Geonames failed to provide a result - return the status supplied in the response
+				NSString	*message = [status objectForKey:kILGeoNamesErrorMessageKey];
+				NSString	*value = [status objectForKey:kILGeoNamesErrorCodeKey];
 				NSError		*error = [NSError errorWithDomain:kILGeoNamesErrorDomain 
 													  code:[value intValue]
 												  userInfo:[NSDictionary dictionaryWithObject:message 
@@ -244,9 +245,10 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 				[self performSelectorOnMainThread:@selector(parseError:) withObject:error waitUntilDone:NO];
 			}
 			else {
+				// Geonames just failed on us - use a default error code
 				NSString	*message = NSLocalizedStringFromTable(@"ILGEONAMES_UNKNOWN_LOOKUP_ERR", @"ILGeoNames", @"");
 				NSError		*error = [NSError errorWithDomain:kILGeoNamesErrorDomain 
-													  code:15
+													  code:kILGeoNamesNoResultsFoundError
 												  userInfo:[NSDictionary dictionaryWithObject:message
 																					   forKey:NSLocalizedDescriptionKey]];
 				[self performSelectorOnMainThread:@selector(parseError:) withObject:error waitUntilDone:NO];
@@ -267,3 +269,46 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 }
 
 @end
+
+
+NSString *const kILGeoNamesResultsKey = @"geonames";
+NSString *const kILGeoNamesTotalResultsCountKey = @"totalResultsCount";
+
+NSString *const kILGeoNamesAdminCode1Key = @"adminCode1";
+NSString *const kILGeoNamesAdminCode2Key = @"adminCode2";
+NSString *const kILGeoNamesAdminCode3Key = @"adminCode3";
+NSString *const kILGeoNamesAdminName1Key = @"adminName1";
+NSString *const kILGeoNamesAdminName2Key = @"adminName2";
+NSString *const kILGeoNamesAdminName3Key = @"adminName3";
+NSString *const kILGeoNamesAdminName4Key = @"adminName4";
+NSString *const kILGeoNamesNameKey = @"name";
+NSString *const kILGeoNamesToponymNameKey = @"toponymName";
+NSString *const kILGeoNamesContinentCodeKey = @"continentCode";
+NSString *const kILGeoNamesCountryCodeKey = @"countryCode";
+NSString *const kILGeoNamesCountryNameKey = @"countryName";
+NSString *const kILGeoNamesPopulationKey = @"population";
+
+NSString *const kILGeoNamesAlternateNamesKey = @"alternameNames";
+NSString *const kILGeoNamesAlternateNameKey = @"name";
+NSString *const kILGeoNamesAlternateLanguageKey = @"lang";
+
+NSString *const kILGeoNamesIDKey = @"geonameId";
+NSString *const kILGeoNamesFeatureClassKey = @"fcl";
+NSString *const kILGeoNamesFeatureCodeKey = @"fcode";
+NSString *const kILGeoNamesFeatureClassNameKey = @"fclName";
+NSString *const kILGeoNamesFeatureNameKey = @"fcodeName";
+NSString *const kILGeoNamesScoreKey = @"score";
+
+NSString *const kILGeoNamesLatitudeKey = @"lat";
+NSString *const kILGeoNamesLongitudeKey = @"lng";
+NSString *const kILGeoNamesDistanceKey = @"distance";
+NSString *const kILGeoNamesElevationKey = @"elevation";
+
+NSString *const kILGeoNamesTimeZoneInfoKey = @"timezone";
+NSString *const kILGeoNamesTimeZoneDSTOffsetKey = @"dstOffset";
+NSString *const kILGeoNamesTimeZoneGMTOffsetKey = @"gmtOffset";
+NSString *const kILGeoNamesTimeZoneIDKey = @"timeZoneId";
+
+NSString *const kILGeoNamesErrorResponseKey = @"status";
+NSString *const kILGeoNamesErrorMessageKey = @"message";
+NSString *const kILGeoNamesErrorCodeKey = @"value";

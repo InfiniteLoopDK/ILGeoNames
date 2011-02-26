@@ -119,21 +119,21 @@
     // Configure the cell...
 	NSDictionary	*geoname = [self.searchResults objectAtIndex:indexPath.row];
 	if(geoname) {
-		NSString	*name = [geoname objectForKey:@"name"];
+		NSString	*name = [geoname objectForKey:kILGeoNamesNameKey];
 		cell.textLabel.text = name;
-		NSString	*subString = [geoname objectForKey:@"countryName"];
+		NSString	*subString = [geoname objectForKey:kILGeoNamesCountryNameKey];
 		if(subString && ![subString isEqualToString:@""]) {
-			NSString	*admin1 = [geoname objectForKey:@"adminName1"];
+			NSString	*admin1 = [geoname objectForKey:kILGeoNamesAdminName1Key];
 			if(admin1 && ![admin1 isEqualToString:@""]) {
 				subString = [admin1 stringByAppendingFormat:@", %@", subString];
-				NSString *admin2 = [geoname objectForKey:@"adminName2"];
+				NSString *admin2 = [geoname objectForKey:kILGeoNamesAdminName2Key];
 				if(admin2 && ![admin2 isEqualToString:@""]) {
 					subString = [admin2 stringByAppendingFormat:@", %@", subString];
 				}
 			}
 		}
 		else {
-			subString = [geoname objectForKey:@"fclName"];
+			subString = [geoname objectForKey:kILGeoNamesFeatureClassNameKey];
 		}
 		cell.detailTextLabel.text = subString;
 		cell.isAccessibilityElement = YES;

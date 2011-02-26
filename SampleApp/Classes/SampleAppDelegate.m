@@ -181,11 +181,11 @@ static NSString *kGeoNamesAccountName = @"ilgeonamessample";
 	// Grab the name of the first place
 	if (geoNames && [geoNames count] >= 1) {
 		NSDictionary *placeName = [geoNames objectAtIndex:0];
-		name = [placeName objectForKey:@"name"];
+		name = [placeName objectForKey:kILGeoNamesNameKey];
 		if(name) {
 			self.locationName.text = name;
-			self.locationType.text = [placeName objectForKey:@"fcodeName"];
-			self.country.text = [placeName objectForKey:@"countryName"];
+			self.locationType.text = [placeName objectForKey:kILGeoNamesFeatureNameKey];
+			self.country.text = [placeName objectForKey:kILGeoNamesCountryNameKey];
 			gotGeocode = YES;
 		}
 	}
@@ -218,14 +218,14 @@ static NSString *kGeoNamesAccountName = @"ilgeonamessample";
 	[self.controller dismissModalViewControllerAnimated:YES];
 	
 	if(result) {
-		double latitude = [[result objectForKey:@"lat"] doubleValue];
-		double longitude = [[result objectForKey:@"lng"] doubleValue];
+		double latitude = [[result objectForKey:kILGeoNamesLatitudeKey] doubleValue];
+		double longitude = [[result objectForKey:kILGeoNamesLongitudeKey] doubleValue];
 		position.text = [NSString stringWithFormat:@"%.5f%c  %.5f%c",
 						 fabs(latitude), latitude >= 0.0 ? 'N' : 'S',
 						 fabs(longitude), longitude >= 0.0 ? 'E' : 'W'];
-		self.locationName.text = [result objectForKey:@"name"];
-		self.locationType.text = [result objectForKey:@"fcodeName"];
-		self.country.text = [result objectForKey:@"countryName"];
+		self.locationName.text = [result objectForKey:kILGeoNamesAlternateNameKey];
+		self.locationType.text = [result objectForKey:kILGeoNamesFeatureNameKey];
+		self.country.text = [result objectForKey:kILGeoNamesCountryNameKey];
 	}
 }
 

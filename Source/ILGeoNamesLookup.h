@@ -91,3 +91,47 @@ extern NSString *const kILGeoNamesErrorDomain;
 - (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFindGeoNames:(NSArray *)geoNames totalFound:(NSUInteger)total;
 
 @end
+
+// Keys used to parse the response from GeoNames services
+extern NSString *const kILGeoNamesResultsKey;
+extern NSString *const kILGeoNamesTotalResultsCountKey;
+
+extern NSString *const kILGeoNamesAdminCode1Key;
+extern NSString *const kILGeoNamesAdminCode2Key;
+extern NSString *const kILGeoNamesAdminCode3Key;
+extern NSString *const kILGeoNamesAdminName1Key;
+extern NSString *const kILGeoNamesAdminName2Key;
+extern NSString *const kILGeoNamesAdminName3Key;
+extern NSString *const kILGeoNamesAdminName4Key;
+extern NSString *const kILGeoNamesNameKey;
+extern NSString *const kILGeoNamesToponymNameKey;
+extern NSString *const kILGeoNamesContinentCodeKey;
+extern NSString *const kILGeoNamesCountryCodeKey;
+extern NSString *const kILGeoNamesCountryNameKey;
+extern NSString *const kILGeoNamesPopulationKey;
+
+extern NSString *const kILGeoNamesAlternateNamesKey;
+extern NSString *const kILGeoNamesAlternateNameKey;
+extern NSString *const kILGeoNamesAlternateLanguageKey;
+
+extern NSString *const kILGeoNamesIDKey;
+extern NSString *const kILGeoNamesFeatureClassKey;
+extern NSString *const kILGeoNamesFeatureCodeKey;
+extern NSString *const kILGeoNamesFeatureClassNameKey;
+extern NSString *const kILGeoNamesFeatureNameKey;
+extern NSString *const kILGeoNamesScoreKey;
+
+extern NSString *const kILGeoNamesLatitudeKey;
+extern NSString *const kILGeoNamesLongitudeKey;
+extern NSString *const kILGeoNamesDistanceKey;
+extern NSString *const kILGeoNamesElevationKey;
+
+extern NSString *const kILGeoNamesTimeZoneInfoKey;
+extern NSString *const kILGeoNamesTimeZoneDSTOffsetKey;
+extern NSString *const kILGeoNamesTimeZoneGMTOffsetKey;
+extern NSString *const kILGeoNamesTimeZoneIDKey;
+
+extern NSString *const kILGeoNamesErrorResponseKey;
+extern NSString *const kILGeoNamesErrorMessageKey;
+extern NSString *const kILGeoNamesErrorCodeKey;
+
