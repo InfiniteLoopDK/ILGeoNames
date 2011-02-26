@@ -30,6 +30,7 @@
 
 #import <Foundation/Foundation.h>
 
+// GeoNames error codes according to http://www.geonames.org/export/webservice-exception.html
 typedef enum {
 	kILGeoNamesAuthorizationExceptionError = 10,
 	kILGeoNamesRecordDoesNotExistError = 11,
@@ -42,7 +43,9 @@ typedef enum {
 	kILGeoNamesDailyCreditLimitExceededError = 18,
 	kILGeoNamesHourlyCreditLimitExceededError = 19,
 	kILGeoNamesWeeklyCreditLimitExceededError = 20,
-	kILGeoNamesServerOverload = 22
+	kILGeoNamesInvalidInputError = 21,
+	kILGeoNamesServerOverloadError = 22,
+	kILGeoNamesServiceNotImplementedError = 23
 } GeoNamesError;
 
 extern NSString *const kILGeoNamesErrorDomain;
