@@ -28,28 +28,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A577CB213132EE600EE7428 /* TouchJSONBenchmark.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DD76FA10486AA7600D96B5E /* TouchJSONBenchmark */;
+			remoteGlobalIDString = 8DD76FA10486AA7600D96B5E;
 			remoteInfo = TouchJSONBenchmark;
 		};
 		6A577D0B13132EE600EE7428 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A577CBA13132EE600EE7428 /* TouchJSON-iOS.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 37A8C0F312B720A8009953BD /* libTouchJSON.a */;
+			remoteGlobalIDString = 37A8C0F312B720A8009953BD;
 			remoteInfo = TouchJSON;
 		};
 		6A577D1413132EE600EE7428 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A577CBD13132EE600EE7428 /* TouchJSON.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 45B15E110947D97B00AE66EB /* UnitTests.octest */;
+			remoteGlobalIDString = 45B15E110947D97B00AE66EB;
 			remoteInfo = UnitTests;
 		};
 		6A577D1613132EE600EE7428 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A577CBD13132EE600EE7428 /* TouchJSON.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 453111B10A64EDBB00A970C2 /* TouchJSON Demo */;
+			remoteGlobalIDString = 453111B10A64EDBB00A970C2;
 			remoteInfo = Demo;
 		};
 /* End PBXContainerItemProxy section */
