@@ -11,6 +11,7 @@ In order to be able to use this sample application you need to perform a few add
 - Sign up for a free account a geonames.org
 - Enter your new geonames account information in SampleAppDelegate.m
 - Download TouchJSON
+- Download OCMock
 
 Each of these steps are detailed in more details below.
 
@@ -33,6 +34,13 @@ The ILGeoNames classes makes use of TouchJSON by Jonathan Wight. In order to be 
 
 Once downloaded, place the TouchJSON folder next to the SampleApp folder. Alternatively, if you already have your own fork of TouchJSON, just point the sample project to your local repository.
  
+### Download OCMock
+
+The UnitTest code makes use of OCMock from Mulle Kybernetik. In order to be able to run the unit tests you will need to download the latest version of OCMock from [Mulle Kybernetik](http://www.mulle-kybernetik.com/software/OCMock/)
+
+Once downloaded, unpack it and place it next to the SampleApp folder. You may need to remove the version from the folder name so it
+s just called OCMock.
+
 You should now be ready to compile and run the sample application. The application shows examples on how to use the following classes:
 
 - ILGeoNamesLookup, the basic wrapper for accessing geonames.org

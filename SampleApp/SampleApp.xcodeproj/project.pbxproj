@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		6A06F6D2134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A06F6D1134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m */; };
 		6A577BC41312F48700EE7428 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A577BC31312F48700EE7428 /* CoreLocation.framework */; };
 		6A577C7213132ADA00EE7428 /* ILGeoNames.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A577C6413132AC400EE7428 /* ILGeoNames.strings */; };
 		6A577C7313132ADB00EE7428 /* ILGeoNamesLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577C6713132AC400EE7428 /* ILGeoNamesLookup.m */; };
@@ -21,6 +22,18 @@
 		6A577D1813132F2C00EE7428 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577CA713132EE600EE7428 /* CJSONDeserializer.m */; };
 		6A577D1D13132FCD00EE7428 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577CA913132EE600EE7428 /* CJSONScanner.m */; };
 		6A577D2013132FD900EE7428 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577C9813132EE600EE7428 /* CDataScanner.m */; };
+		6A8D868E134E45350080FAE5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		6A8D868F134E45350080FAE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		6A8D8690134E45350080FAE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6A8D8696134E45350080FAE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D8694134E45350080FAE5 /* InfoPlist.strings */; };
+		6AA6BC1D1350C2B400FB106A /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA6BC1C1350C2B400FB106A /* libOCMock.a */; };
+		6AA6BC1E1350C55D00FB106A /* ILGeoNamesLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577C6713132AC400EE7428 /* ILGeoNamesLookup.m */; };
+		6AA6BC1F1350C58D00FB106A /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577C9813132EE600EE7428 /* CDataScanner.m */; };
+		6AA6BC201350C59900FB106A /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577CA713132EE600EE7428 /* CJSONDeserializer.m */; };
+		6AA6BC211350C59C00FB106A /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577CA913132EE600EE7428 /* CJSONScanner.m */; };
+		6AA6BC251350C5CF00FB106A /* AppleComputerHeadquaters.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6BC221350C5CF00FB106A /* AppleComputerHeadquaters.json */; };
+		6AA6BC261350C5CF00FB106A /* InvalidPosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6BC231350C5CF00FB106A /* InvalidPosition.json */; };
+		6AA6BC271350C5CF00FB106A /* MiddleOfNowhere.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +77,8 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* SampleApp_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApp_Prefix.pch; sourceTree = "<group>"; };
+		6A06F6D0134F6B7D0038B1A9 /* ILGeoNamesLookupTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILGeoNamesLookupTest.h; sourceTree = "<group>"; };
+		6A06F6D1134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILGeoNamesLookupTest.m; sourceTree = "<group>"; };
 		6A577BC31312F48700EE7428 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6A577C5B13131ACE00EE7428 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.mdown; path = ../README.mdown; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
 		6A577C6213131F1200EE7428 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = SOURCE_ROOT; };
@@ -165,6 +180,14 @@
 		6A577CFD13132EE600EE7428 /* rfc4627a.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = rfc4627a.plist; sourceTree = "<group>"; };
 		6A577CFE13132EE600EE7428 /* rfc4627b.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rfc4627b.json; sourceTree = "<group>"; };
 		6A577CFF13132EE600EE7428 /* rfc4627b.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = rfc4627b.plist; sourceTree = "<group>"; };
+		6A8D868D134E45340080FAE5 /* UnitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A8D8693134E45350080FAE5 /* UnitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTest-Info.plist"; sourceTree = "<group>"; };
+		6A8D8695134E45350080FAE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A8D8697134E45350080FAE5 /* UnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTest-Prefix.pch"; sourceTree = "<group>"; };
+		6AA6BC1C1350C2B400FB106A /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = ../OCMock/Release/Library/libOCMock.a; sourceTree = SOURCE_ROOT; };
+		6AA6BC221350C5CF00FB106A /* AppleComputerHeadquaters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppleComputerHeadquaters.json; sourceTree = "<group>"; };
+		6AA6BC231350C5CF00FB106A /* InvalidPosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InvalidPosition.json; sourceTree = "<group>"; };
+		6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MiddleOfNowhere.json; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* SampleApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SampleApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +200,17 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6A577BC41312F48700EE7428 /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A8D8689134E45340080FAE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A8D868E134E45350080FAE5 /* UIKit.framework in Frameworks */,
+				6A8D868F134E45350080FAE5 /* Foundation.framework in Frameworks */,
+				6A8D8690134E45350080FAE5 /* CoreGraphics.framework in Frameworks */,
+				6AA6BC1D1350C2B400FB106A /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* SampleApp.app */,
+				6A8D868D134E45340080FAE5 /* UnitTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +273,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6AA6BC1C1350C2B400FB106A /* libOCMock.a */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -255,6 +291,7 @@
 				6A577C6813132AC400EE7428 /* ILGeoNamesSearchController.h */,
 				6A577C6913132AC400EE7428 /* ILGeoNamesSearchController.m */,
 				6A577C6A13132AC400EE7428 /* ILGeoNamesSearchController.xib */,
+				6A8D8691134E45350080FAE5 /* UnitTest */,
 			);
 			name = Source;
 			path = ../Source;
@@ -473,6 +510,29 @@
 			path = JSONChecker;
 			sourceTree = "<group>";
 		};
+		6A8D8691134E45350080FAE5 /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				6A06F6D0134F6B7D0038B1A9 /* ILGeoNamesLookupTest.h */,
+				6A06F6D1134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m */,
+				6A8D8692134E45350080FAE5 /* Supporting Files */,
+			);
+			path = UnitTest;
+			sourceTree = "<group>";
+		};
+		6A8D8692134E45350080FAE5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6AA6BC221350C5CF00FB106A /* AppleComputerHeadquaters.json */,
+				6AA6BC231350C5CF00FB106A /* InvalidPosition.json */,
+				6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */,
+				6A8D8693134E45350080FAE5 /* UnitTest-Info.plist */,
+				6A8D8694134E45350080FAE5 /* InfoPlist.strings */,
+				6A8D8697134E45350080FAE5 /* UnitTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -492,6 +552,24 @@
 			productName = SampleApp;
 			productReference = 1D6058910D05DD3D006BFB54 /* SampleApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		6A8D868C134E45340080FAE5 /* UnitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A8D869C134E45350080FAE5 /* Build configuration list for PBXNativeTarget "UnitTest" */;
+			buildPhases = (
+				6A8D8688134E45340080FAE5 /* Sources */,
+				6A8D8689134E45340080FAE5 /* Frameworks */,
+				6A8D868A134E45340080FAE5 /* Resources */,
+				6A8D868B134E45340080FAE5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTest;
+			productName = UnitTest;
+			productReference = 6A8D868D134E45340080FAE5 /* UnitTest.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -531,6 +609,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* SampleApp */,
+				6A8D868C134E45340080FAE5 /* UnitTest */,
 			);
 		};
 /* End PBXProject section */
@@ -577,7 +656,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A8D868A134E45340080FAE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A8D8696134E45350080FAE5 /* InfoPlist.strings in Resources */,
+				6AA6BC251350C5CF00FB106A /* AppleComputerHeadquaters.json in Resources */,
+				6AA6BC261350C5CF00FB106A /* InvalidPosition.json in Resources */,
+				6AA6BC271350C5CF00FB106A /* MiddleOfNowhere.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A8D868B134E45340080FAE5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
@@ -594,6 +700,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6A8D8688134E45340080FAE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A06F6D2134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m in Sources */,
+				6AA6BC1E1350C55D00FB106A /* ILGeoNamesLookup.m in Sources */,
+				6AA6BC1F1350C58D00FB106A /* CDataScanner.m in Sources */,
+				6AA6BC201350C59900FB106A /* CJSONDeserializer.m in Sources */,
+				6AA6BC211350C59C00FB106A /* CJSONScanner.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -603,6 +721,14 @@
 				6A577C6513132AC400EE7428 /* en */,
 			);
 			name = ILGeoNames.strings;
+			sourceTree = "<group>";
+		};
+		6A8D8694134E45350080FAE5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A8D8695134E45350080FAE5 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -632,6 +758,69 @@
 				INFOPLIST_FILE = "SampleApp-Info.plist";
 				PRODUCT_NAME = SampleApp;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6A8D869D134E45350080FAE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/../OCMock/Release/\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "../Source/UnitTest/UnitTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../OCMock/Release/Library\"",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-force_load",
+					"\"$(SRCROOT)/../OCMock/Release/Library/libOCMock.a\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		6A8D869E134E45350080FAE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/../OCMock/Release/\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "../Source/UnitTest/UnitTest-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../OCMock/Release/Library\"",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-force_load",
+					"\"$(SRCROOT)/../OCMock/Release/Library/libOCMock.a\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -670,6 +859,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A8D869C134E45350080FAE5 /* Build configuration list for PBXNativeTarget "UnitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A8D869D134E45350080FAE5 /* Debug */,
+				6A8D869E134E45350080FAE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
