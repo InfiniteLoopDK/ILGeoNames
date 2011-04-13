@@ -35,6 +35,8 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 
 @interface ILGeoNamesLookup ()
 
+- (void)threadedRequestWithURLString:(NSString*)urlString;
+- (void)sendRequestWithURLString:(NSString*)urlString;
 - (void)downloadStarted;
 - (void)parseEnded:(NSDictionary*)result;
 - (void)parseError:(NSError*)error;
@@ -70,10 +72,14 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	[super dealloc];
 }
 
+- (void)threadedRequestWithURLString:(NSString*)urlString {
+    NSAutoreleasePool *downloadPool = [[NSAutoreleasePool alloc] init];
+    [self sendRequestWithURLString:urlString];
+	[downloadPool release];
+}
+
 - (void)sendRequestWithURLString:(NSString*)urlString
 {
-    NSAutoreleasePool *downloadPool = [[NSAutoreleasePool alloc] init];
-	
 	NSURLRequest	*request;
 	
 	// TODO - handle multiple outstanding requests
@@ -103,8 +109,6 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 		self.dataBuffer = nil;
 		self.dataConnection = nil;
 	}
-	
-	[downloadPool release];
 }
 
 - (void)findNearbyPlaceNameForLatitude:(double)latitude longitude:(double)longitude
@@ -115,7 +119,7 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyURL, latitude, longitude, userID];
 	
 	// Detach a thread to fetch the placename
-	[NSThread detachNewThreadSelector:@selector(sendRequestWithURLString:) toTarget:self withObject:urlString];
+	[NSThread detachNewThreadSelector:@selector(threadedRequestWithURLString:) toTarget:self withObject:urlString];
 }
 
 - (void)search:(NSString*)query maxRows:(NSInteger)maxRows startRow:(NSUInteger)startRow language:(NSString*)langCode
@@ -139,7 +143,7 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	urlString = [NSString stringWithFormat:kILGeoNamesSearchURL, escQuery, maxRows, startRow, langCode, userID];
 	
 	// Detach a thread to fetch the placename
-	[NSThread detachNewThreadSelector:@selector(sendRequestWithURLString:) toTarget:self withObject:urlString];
+	[NSThread detachNewThreadSelector:@selector(threadedRequestWithURLString:) toTarget:self withObject:urlString];
 }
 
 - (void)cancel
