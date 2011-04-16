@@ -72,14 +72,13 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	[super dealloc];
 }
 
-- (void)threadedRequestWithURLString:(NSString*)urlString {
-    NSAutoreleasePool *downloadPool = [[NSAutoreleasePool alloc] init];
-    [self sendRequestWithURLString:urlString];
-	[downloadPool release];
+- (void)sendRequestWithURLString:(NSString*)urlString {
+    // Detach a thread to perform the request
+	[NSThread detachNewThreadSelector:@selector(threadedRequestWithURLString:) toTarget:self withObject:urlString];
 }
 
-- (void)sendRequestWithURLString:(NSString*)urlString
-{
+- (void)threadedRequestWithURLString:(NSString*)urlString {
+    NSAutoreleasePool *downloadPool = [[NSAutoreleasePool alloc] init];
 	NSURLRequest	*request;
 	
 	// TODO - handle multiple outstanding requests
@@ -109,21 +108,19 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 		self.dataBuffer = nil;
 		self.dataConnection = nil;
 	}
+
+	[downloadPool release];
 }
 
-- (void)findNearbyPlaceNameForLatitude:(double)latitude longitude:(double)longitude
-{
+- (void)findNearbyPlaceNameForLatitude:(double)latitude longitude:(double)longitude {
 	NSString	*urlString;
 	
 	// Request formatted according to http://www.geonames.org/export/web-services.html#findNearby
 	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyURL, latitude, longitude, userID];
-	
-	// Detach a thread to fetch the placename
-	[NSThread detachNewThreadSelector:@selector(threadedRequestWithURLString:) toTarget:self withObject:urlString];
+    [self sendRequestWithURLString:urlString];
 }
 
-- (void)search:(NSString*)query maxRows:(NSInteger)maxRows startRow:(NSUInteger)startRow language:(NSString*)langCode
-{
+- (void)search:(NSString*)query maxRows:(NSInteger)maxRows startRow:(NSUInteger)startRow language:(NSString*)langCode {
 	NSString	*urlString;
 	
 	// Sanitize parameters
@@ -141,9 +138,7 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	// Request formatted according to http://www.geonames.org/export/geonames-search.html
 	NSString *escQuery = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	urlString = [NSString stringWithFormat:kILGeoNamesSearchURL, escQuery, maxRows, startRow, langCode, userID];
-	
-	// Detach a thread to fetch the placename
-	[NSThread detachNewThreadSelector:@selector(threadedRequestWithURLString:) toTarget:self withObject:urlString];
+    [self sendRequestWithURLString:urlString];
 }
 
 - (void)cancel
