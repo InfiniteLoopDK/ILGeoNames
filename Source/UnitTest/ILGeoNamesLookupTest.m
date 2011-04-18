@@ -61,11 +61,10 @@
 - (void)loadCannedResultWithName:(NSString*)cannedName {
 	cannedResult = [[NSData alloc] initWithContentsOfFile:
 					[[NSBundle bundleForClass:[self class]] pathForResource:cannedName ofType:@"json"]];
+	STAssertNotNil(cannedResult, @"Failed to load canned result '%@'", cannedName);
 }
 
 - (void)returnCannedResultForRequest:(NSString*)request {
-    NSAutoreleasePool *downloadPool = [[NSAutoreleasePool alloc] init];
-    
 	// Validate request
 	STAssertNotNil(request, @"Invalid request");
 	NSURL *url = [NSURL URLWithString:request];
@@ -86,8 +85,6 @@
 	else {
 		[parser connection:nil didFailWithError:cannedError];
 	}
-    
-    [downloadPool release];
 }
 
 - (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFailWithError:(NSError *)error
@@ -121,7 +118,6 @@
 - (void) testMiddleOfNowhere {
 	// Mock the ILGeoNamesLookup so no actual network access is performed
 	[self loadCannedResultWithName:@"MiddleOfNowhere"];
-	STAssertNotNil(cannedResult, @"Failed to load canned result 'MiddleOfNowhere.json'");
 	mockParser = [OCMockObject partialMockForObject:parser];
 	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
                  onObject:self] sendRequestWithURLString:[OCMArg any]];
@@ -140,7 +136,6 @@
 - (void) testInvalidPosition {
 	// Mock the ILGeoNamesLookup so no actual network access is performed
 	[self loadCannedResultWithName:@"InvalidPosition"];
-	STAssertNotNil(cannedResult, @"Failed to load canned result 'InvalidPosition.json'");
 	mockParser = [OCMockObject partialMockForObject:parser];
 	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
 					   onObject:self] sendRequestWithURLString:[OCMArg any]];
@@ -163,7 +158,6 @@
 -(void) testAppleComputerHeadquarters {
 	// Mock the ILGeoNamesLookup so no actual network access is performed
 	[self loadCannedResultWithName:@"AppleComputerHeadquaters"];
-	STAssertNotNil(cannedResult, @"Failed to load canned result 'AppleComputerHeadquaters.json'");
 	mockParser = [OCMockObject partialMockForObject:parser];
 	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
 					   onObject:self] sendRequestWithURLString:[OCMArg any]];

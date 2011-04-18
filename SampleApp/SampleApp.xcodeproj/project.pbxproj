@@ -26,7 +26,6 @@
 		6A8D868F134E45350080FAE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		6A8D8690134E45350080FAE5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6A8D8696134E45350080FAE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A8D8694134E45350080FAE5 /* InfoPlist.strings */; };
-		6AA6BC1D1350C2B400FB106A /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA6BC1C1350C2B400FB106A /* libOCMock.a */; };
 		6AA6BC1E1350C55D00FB106A /* ILGeoNamesLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577C6713132AC400EE7428 /* ILGeoNamesLookup.m */; };
 		6AA6BC1F1350C58D00FB106A /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577C9813132EE600EE7428 /* CDataScanner.m */; };
 		6AA6BC201350C59900FB106A /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577CA713132EE600EE7428 /* CJSONDeserializer.m */; };
@@ -184,7 +183,6 @@
 		6A8D8693134E45350080FAE5 /* UnitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTest-Info.plist"; sourceTree = "<group>"; };
 		6A8D8695134E45350080FAE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A8D8697134E45350080FAE5 /* UnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTest-Prefix.pch"; sourceTree = "<group>"; };
-		6AA6BC1C1350C2B400FB106A /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = ../OCMock/Release/Library/libOCMock.a; sourceTree = SOURCE_ROOT; };
 		6AA6BC221350C5CF00FB106A /* AppleComputerHeadquaters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppleComputerHeadquaters.json; sourceTree = "<group>"; };
 		6AA6BC231350C5CF00FB106A /* InvalidPosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InvalidPosition.json; sourceTree = "<group>"; };
 		6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MiddleOfNowhere.json; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 				6A8D868E134E45350080FAE5 /* UIKit.framework in Frameworks */,
 				6A8D868F134E45350080FAE5 /* Foundation.framework in Frameworks */,
 				6A8D8690134E45350080FAE5 /* CoreGraphics.framework in Frameworks */,
-				6AA6BC1D1350C2B400FB106A /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +270,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6AA6BC1C1350C2B400FB106A /* libOCMock.a */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -779,13 +775,11 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../OCMock/Release/Library\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
+					"-ObjC",
 					"-force_load",
 					"\"$(SRCROOT)/../OCMock/Release/Library/libOCMock.a\"",
 				);
@@ -809,13 +803,11 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../OCMock/Release/Library\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					SenTestingKit,
+					"-ObjC",
 					"-force_load",
 					"\"$(SRCROOT)/../OCMock/Release/Library/libOCMock.a\"",
 				);
