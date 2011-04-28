@@ -26,7 +26,12 @@
 //  
 
 #import "ILGeoNamesLookup.h"
-#import "CJSONDeserializer.h"
+
+#if USE_TOUCHJSON_PARSER
+# import "CJSONDeserializer.h"
+#else
+# import "JSONKit.h"
+#endif
 
 static NSString *kILGeoNamesFindNearbyURL = @"http://api.geonames.org/findNearbyJSON?lat=%.8f&lng=%.8f&style=FULL&username=%@";
 static NSString *kILGeoNamesSearchURL = @"http://api.geonames.org/searchJSON?q=%@&maxRows=%d&startRow=%d&lang=%@&isNameRequired=true&style=FULL&username=%@";
@@ -223,7 +228,11 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	
     // Parse the data
 	@synchronized(self) {
+#if USE_TOUCHJSON_PARSER
 		resultDict = [[CJSONDeserializer deserializer] deserializeAsDictionary:dataBuffer error:&error];
+#else
+        resultDict = [dataBuffer objectFromJSONDataWithParseOptions:JKParseOptionValidFlags error:&error];
+#endif
 	}
 	if(resultDict) {
 		NSArray *geoNames = [resultDict objectForKey:kILGeoNamesResultsKey];

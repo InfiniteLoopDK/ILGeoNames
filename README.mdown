@@ -10,7 +10,7 @@ In order to be able to use this sample application you need to perform a few add
 
 - Sign up for a free account a geonames.org
 - Enter your new geonames account information in SampleAppDelegate.m
-- Download TouchJSON
+- Download JSONKit
 - Download OCMock
 
 Each of these steps are detailed in more details below.
@@ -28,11 +28,11 @@ Locate the following line near the top of the file and replace the account infor
 
 	static NSString *kGeoNamesAccountName = @"ilgeonamessample";
 
-### Download TouchJSON
+### Download JSONKit
 
-The ILGeoNames classes makes use of TouchJSON by Jonathan Wight. In order to be able to build the sample project - and your own for that matter - you need to download a copy of the TouchJSON code from [GitHub](http://github.com/TouchCode/TouchJSON)
+The ILGeoNames classes makes use of JSONKit by John Engelhart. In order to be able to build the sample project - and your own for that matter - you need to download a copy of the JSONKit code from [GitHub](http://github.com/johnezang/JSONKit)
 
-Once downloaded, place the TouchJSON folder next to the SampleApp folder. Alternatively, if you already have your own fork of TouchJSON, just point the sample project to your local repository.
+Once downloaded, place the JSONKit folder next to the SampleApp folder. Alternatively, if you already have your own fork of JSONKit, just point the sample project to your local repository.
  
 ### Download OCMock
 
