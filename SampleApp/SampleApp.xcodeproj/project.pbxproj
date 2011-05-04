@@ -14,6 +14,8 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		6A06F6D2134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A06F6D1134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m */; };
+		6A4CF4771370C7D200D62EBB /* EmptyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A4CF4761370C7D200D62EBB /* EmptyResponse.json */; };
+		6A4CF4791370CA2900D62EBB /* MalformedResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A4CF4781370CA2900D62EBB /* MalformedResponse.json */; };
 		6A577BC41312F48700EE7428 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A577BC31312F48700EE7428 /* CoreLocation.framework */; };
 		6A577C7213132ADA00EE7428 /* ILGeoNames.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A577C6413132AC400EE7428 /* ILGeoNames.strings */; };
 		6A577C7313132ADB00EE7428 /* ILGeoNamesLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A577C6713132AC400EE7428 /* ILGeoNamesLookup.m */; };
@@ -33,6 +35,17 @@
 		6ABA50DD136A09E000A1AFC3 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA50C2136A09C900A1AFC3 /* JSONKit.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		6A14E432136F774000A1FFD8 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.gcc.4_2;
+			fileType = sourcecode.c;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* SampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAppDelegate.h; sourceTree = "<group>"; wrapsLines = 1; };
@@ -45,6 +58,8 @@
 		32CA4F630368D1EE00C91783 /* SampleApp_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleApp_Prefix.pch; sourceTree = "<group>"; };
 		6A06F6D0134F6B7D0038B1A9 /* ILGeoNamesLookupTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILGeoNamesLookupTest.h; sourceTree = "<group>"; };
 		6A06F6D1134F6B7D0038B1A9 /* ILGeoNamesLookupTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILGeoNamesLookupTest.m; sourceTree = "<group>"; };
+		6A4CF4761370C7D200D62EBB /* EmptyResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EmptyResponse.json; sourceTree = "<group>"; };
+		6A4CF4781370CA2900D62EBB /* MalformedResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MalformedResponse.json; sourceTree = "<group>"; };
 		6A577BC31312F48700EE7428 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6A577C5B13131ACE00EE7428 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.mdown; path = ../README.mdown; sourceTree = SOURCE_ROOT; wrapsLines = 1; };
 		6A577C6213131F1200EE7428 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = SOURCE_ROOT; };
@@ -188,6 +203,8 @@
 				6AA6BC221350C5CF00FB106A /* AppleComputerHeadquaters.json */,
 				6AA6BC231350C5CF00FB106A /* InvalidPosition.json */,
 				6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */,
+				6A4CF4761370C7D200D62EBB /* EmptyResponse.json */,
+				6A4CF4781370CA2900D62EBB /* MalformedResponse.json */,
 				6A8D8693134E45350080FAE5 /* UnitTest-Info.plist */,
 				6A8D8694134E45350080FAE5 /* InfoPlist.strings */,
 				6A8D8697134E45350080FAE5 /* UnitTest-Prefix.pch */,
@@ -237,6 +254,7 @@
 				6A8D868B134E45340080FAE5 /* ShellScript */,
 			);
 			buildRules = (
+				6A14E432136F774000A1FFD8 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -295,6 +313,8 @@
 				6AA6BC251350C5CF00FB106A /* AppleComputerHeadquaters.json in Resources */,
 				6AA6BC261350C5CF00FB106A /* InvalidPosition.json in Resources */,
 				6AA6BC271350C5CF00FB106A /* MiddleOfNowhere.json in Resources */,
+				6A4CF4771370C7D200D62EBB /* EmptyResponse.json in Resources */,
+				6A4CF4791370CA2900D62EBB /* MalformedResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,16 +418,17 @@
 					"\"$(SRCROOT)/../OCMock/Release/\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "../Source/UnitTest/UnitTest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
+					"-lgcov",
 					"-framework",
 					SenTestingKit,
 					"-ObjC",
@@ -429,13 +450,14 @@
 					"\"$(SRCROOT)/../OCMock/Release/\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREFIX_HEADER = "../Source/UnitTest/UnitTest-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
+					"-lgcov",
 					"-framework",
 					SenTestingKit,
 					"-ObjC",

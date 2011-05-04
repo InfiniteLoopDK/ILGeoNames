@@ -126,7 +126,7 @@
 	[parser findNearbyPlaceNameForLatitude:-10.0 longitude:-10.0];
 	
 	// Validate result
-	STAssertTrue([self waitForCompletion:90.0], @"Failed to get any results in time");
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
 	STAssertEquals([searchResult count], (NSUInteger)0, @"Should not find any results in the middle of nowhere: %@", searchResult);
 }
 
@@ -144,7 +144,7 @@
 	[parser findNearbyPlaceNameForLatitude:-100.0 longitude:-10.0];
 	
 	// Validate result
-	STAssertTrue([self waitForCompletion:90.0], @"Failed to get any results in time");
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
 	STAssertNil(searchResult, @"Should not find any results for invalid position: %@", searchResult);
 	STAssertNotNil(searchError, @"Expected an error");
 	STAssertEqualObjects([searchError domain], kILGeoNamesErrorDomain, @"Unexpected error domain");
@@ -166,7 +166,7 @@
 	[parser findNearbyPlaceNameForLatitude:37.3316414613743 longitude:-122.030189037323];
 	
 	// Validate result
-	STAssertTrue([self waitForCompletion:90.0], @"Failed to get any results in time");
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
 	STAssertNotNil(searchResult, @"Didn't expect an error");
 	NSDictionary	*firstResult = [searchResult objectAtIndex:0];
 	STAssertNotNil(firstResult, @"Expected at least one result");
@@ -183,5 +183,40 @@
 	STAssertEqualObjects([timezone objectForKey:@"timeZoneId"], @"America/Los_Angeles", @"Unexpected time zone found");
 }
 
+// Test how an empty, but otherwise valid JSON response is handled, eg. how a potential service malfunction is treated
+-(void)testEmptyResponse {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"EmptyResponse"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+    
+	// Perform code under test
+	[parser findNearbyPlaceNameForLatitude:37.3 longitude:-122.0];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNil(searchResult, @"Should not find any results for empty response: %@", searchResult);
+	STAssertNotNil(searchError, @"Expected an error");
+	STAssertEqualObjects([searchError domain], kILGeoNamesErrorDomain, @"Unexpected error domain");
+	STAssertEquals([searchError code], kILGeoNamesNoResultsFoundError, @"Unexpected error code");
+}
+
+// Test how a malformed JSON response is handled, eg. how a potential service malfunction is treated
+-(void)testMalformedResponse {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"MalformedResponse"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+    
+	// Perform code under test
+	[parser findNearbyPlaceNameForLatitude:37.3 longitude:-122.0];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNil(searchResult, @"Should not find any results for invalid response: %@", searchResult);
+	STAssertNotNil(searchError, @"Expected an error");
+}
 
 @end
