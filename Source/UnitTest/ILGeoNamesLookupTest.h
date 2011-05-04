@@ -34,6 +34,7 @@
 	ILGeoNamesLookup *parser;
 	NSError *searchError;
 	NSArray *searchResult;
+    NSUInteger totalFound;
 	BOOL	done;
     id mockParser;
     NSData *cannedResult;

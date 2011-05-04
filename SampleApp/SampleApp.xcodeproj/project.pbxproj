@@ -29,6 +29,8 @@
 		6AA6BC251350C5CF00FB106A /* AppleComputerHeadquaters.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6BC221350C5CF00FB106A /* AppleComputerHeadquaters.json */; };
 		6AA6BC261350C5CF00FB106A /* InvalidPosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6BC231350C5CF00FB106A /* InvalidPosition.json */; };
 		6AA6BC271350C5CF00FB106A /* MiddleOfNowhere.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */; };
+		6AB8332D137213DF00057978 /* Stonehenge0.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AB8332B137213DF00057978 /* Stonehenge0.json */; };
+		6AB8332E137213DF00057978 /* Stonehenge50.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AB8332C137213DF00057978 /* Stonehenge50.json */; };
 		6ABA50DA136A09C900A1AFC3 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 6ABA50C0136A09C900A1AFC3 /* CHANGELOG.md */; };
 		6ABA50DB136A09C900A1AFC3 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA50C2136A09C900A1AFC3 /* JSONKit.m */; };
 		6ABA50DC136A09C900A1AFC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6ABA50C3136A09C900A1AFC3 /* README.md */; };
@@ -76,6 +78,8 @@
 		6AA6BC221350C5CF00FB106A /* AppleComputerHeadquaters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppleComputerHeadquaters.json; sourceTree = "<group>"; };
 		6AA6BC231350C5CF00FB106A /* InvalidPosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InvalidPosition.json; sourceTree = "<group>"; };
 		6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MiddleOfNowhere.json; sourceTree = "<group>"; };
+		6AB8332B137213DF00057978 /* Stonehenge0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Stonehenge0.json; sourceTree = "<group>"; };
+		6AB8332C137213DF00057978 /* Stonehenge50.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Stonehenge50.json; sourceTree = "<group>"; };
 		6ABA50C0136A09C900A1AFC3 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		6ABA50C1136A09C900A1AFC3 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		6ABA50C2136A09C900A1AFC3 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 				6AA6BC241350C5CF00FB106A /* MiddleOfNowhere.json */,
 				6A4CF4761370C7D200D62EBB /* EmptyResponse.json */,
 				6A4CF4781370CA2900D62EBB /* MalformedResponse.json */,
+				6AB8332B137213DF00057978 /* Stonehenge0.json */,
+				6AB8332C137213DF00057978 /* Stonehenge50.json */,
 				6A8D8693134E45350080FAE5 /* UnitTest-Info.plist */,
 				6A8D8694134E45350080FAE5 /* InfoPlist.strings */,
 				6A8D8697134E45350080FAE5 /* UnitTest-Prefix.pch */,
@@ -315,6 +321,8 @@
 				6AA6BC271350C5CF00FB106A /* MiddleOfNowhere.json in Resources */,
 				6A4CF4771370C7D200D62EBB /* EmptyResponse.json in Resources */,
 				6A4CF4791370CA2900D62EBB /* MalformedResponse.json in Resources */,
+				6AB8332D137213DF00057978 /* Stonehenge0.json in Resources */,
+				6AB8332E137213DF00057978 /* Stonehenge50.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

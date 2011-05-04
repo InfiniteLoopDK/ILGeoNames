@@ -46,6 +46,7 @@
 	cannedResult = nil;
 	cannedError = nil;
 	mockParser = nil;
+    totalFound = 0;
 }
 
 - (void)tearDown
@@ -71,12 +72,26 @@
 	STAssertNotNil(url, @"Failed to make request '%@' into url", request);
 	STAssertEqualObjects([url scheme], @"http", @"Invalid request scheme");
 	STAssertEqualObjects([url host], @"api.geonames.org", @"Invalid request host");
-	STAssertEqualObjects([url path], @"/findNearbyJSON", @"Invalid request path");
 	NSArray *params = [[url query] componentsSeparatedByString:@"&"];
 	STAssertTrue([params containsObject:@"username=unittest"], @"Username not set correctly in request");
+	STAssertTrue([params containsObject:@"style=FULL"], @"style not set correctly in request");
+    if([[url path] isEqualToString:@"/findNearbyJSON"]) {
+        STAssertTrue([[params objectAtIndex:0] hasPrefix:@"lat="], @"latitude not set correctly in request");
+        STAssertTrue([[params objectAtIndex:1] hasPrefix:@"lng="], @"longitude not set correctly in request");
+    }
+    else if([[url path] isEqualToString:@"/searchJSON"]) {
+        STAssertTrue([[params objectAtIndex:0] hasPrefix:@"q="], @"query not set correctly in request");
+        STAssertTrue([[params objectAtIndex:1] hasPrefix:@"maxRows="], @"maxRows not set correctly in request");
+        STAssertTrue([[params objectAtIndex:2] hasPrefix:@"startRow="], @"startRow not set correctly in request");
+        STAssertTrue([params containsObject:@"lang=en"], @"laguage not set correctly in request");
+        STAssertTrue([params containsObject:@"isNameRequired=true"], @"isNameRequired not set correctly in request");
+    }
+    else
+        STFail(@"Invalid request: %@",[url path]);
 	
 	// Return canned result or error
 	if(cannedResult) {
+        [parser connection:nil didReceiveResponse:nil];
 		parser.dataBuffer = [NSMutableData data];
 		[parser connection:nil didReceiveData:cannedResult];
 		[parser connectionDidFinishLoading:nil];
@@ -93,10 +108,15 @@
 	done = YES;
 }
 
-- (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFindGeoNames:(NSArray *)geoNames totalFound:(NSUInteger)total;
+- (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFindGeoNames:(NSArray *)geoNames totalFound:(NSUInteger)total
 {
 	searchResult = [geoNames retain];
+    totalFound = total;
 	done = YES;
+}
+
+- (void)geoNamesLookup:(ILGeoNamesLookup *)handler networkIsActive:(BOOL)isActive
+{
 }
 
 - (BOOL)waitForCompletion:(NSTimeInterval)timeoutSecs
@@ -120,14 +140,16 @@
 	[self loadCannedResultWithName:@"MiddleOfNowhere"];
 	mockParser = [OCMockObject partialMockForObject:parser];
 	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
-                 onObject:self] sendRequestWithURLString:[OCMArg any]];
-	
+                       onObject:self] sendRequestWithURLString:[OCMArg any]];
+    
 	// Perform code under test
 	[parser findNearbyPlaceNameForLatitude:-10.0 longitude:-10.0];
 	
 	// Validate result
 	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNotNil(searchResult, @"Didn't expect an error");
 	STAssertEquals([searchResult count], (NSUInteger)0, @"Should not find any results in the middle of nowhere: %@", searchResult);
+    STAssertEquals(totalFound, 0U, @"Unexpected number of total results");
 }
 
 // Should result in the following request
@@ -168,6 +190,7 @@
 	// Validate result
 	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
 	STAssertNotNil(searchResult, @"Didn't expect an error");
+    STAssertEquals(totalFound, 1U, @"Unexpected number of total results");
 	NSDictionary	*firstResult = [searchResult objectAtIndex:0];
 	STAssertNotNil(firstResult, @"Expected at least one result");
 	STAssertEqualObjects([firstResult objectForKey:@"geonameId"], [NSNumber numberWithInt:6301897], @"Unexpected ID found");
@@ -218,5 +241,82 @@
 	STAssertNil(searchResult, @"Should not find any results for invalid response: %@", searchResult);
 	STAssertNotNil(searchError, @"Expected an error");
 }
+
+// Test how a network error is handled, eg. how a potential service malfunction is treated
+-(void)testConnectionError {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	cannedError = [[NSError alloc] initWithDomain:NSURLErrorDomain 
+                                             code:NSURLErrorResourceUnavailable
+                                         userInfo:[NSDictionary dictionaryWithObject:@"UnitTest" 
+                                                                              forKey:NSURLErrorFailingURLStringErrorKey]];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+    
+	// Perform code under test
+	[parser findNearbyPlaceNameForLatitude:37.3 longitude:-122.0];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNil(searchResult, @"Should not find any results for invalid response: %@", searchResult);
+	STAssertNotNil(searchError, @"Expected an error");
+	STAssertEqualObjects([searchError domain], NSURLErrorDomain, @"Unexpected error domain");
+	STAssertEquals([searchError code], NSURLErrorResourceUnavailable, @"Unexpected error code");
+}
+
+// Should result in the following request
+// "http://api.geonames.org/searchJSON?q=Stonehenge&maxRows=5&startRow=0&lang=en&isNameRequired=true&style=FULL&username=unittest"
+//
+-(void) testSearchForStonehenge {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"Stonehenge0"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+	
+	// Perform code under test
+	[parser search:@"Stonehenge" maxRows:5 startRow:0 language:@"en"];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNotNil(searchResult, @"Didn't expect an error");
+    STAssertEquals(totalFound, 33U, @"Unexpected number of total results");
+	NSDictionary	*firstResult = [searchResult objectAtIndex:0];
+	STAssertNotNil(firstResult, @"Expected at least one result");
+	STAssertEqualObjects([firstResult objectForKey:@"geonameId"], [NSNumber numberWithInt:2636812], @"Unexpected ID found");
+	STAssertEqualObjects([firstResult objectForKey:@"name"], @"Stonehenge", @"Unexpected place name found");
+	STAssertNotNil([firstResult objectForKey:@"alternateNames"], @"Expected alternate names");
+	STAssertEqualObjects([firstResult objectForKey:@"adminName1"], @"England", @"Unexpected admin name found");
+	STAssertEqualObjects([firstResult objectForKey:@"adminCode1"], @"ENG", @"Unexpected admin code found");
+	STAssertEqualObjects([firstResult objectForKey:@"countryCode"], @"GB", @"Unexpected country code found");
+	STAssertEqualObjects([firstResult objectForKey:@"countryName"], @"United Kingdom", @"Unexpected country name found");
+	STAssertEqualObjects([firstResult objectForKey:@"continentCode"], @"EU", @"Unexpected continent code found");
+	NSDictionary *timezone = [firstResult objectForKey:@"timezone"];
+	STAssertNotNil(timezone, @"Expected time zone information");
+	STAssertEqualObjects([timezone objectForKey:@"gmtOffset"], [NSNumber numberWithInt:0], @"Unexpected GMT offset found");
+	STAssertEqualObjects([timezone objectForKey:@"timeZoneId"], @"Europe/London", @"Unexpected time zone found");
+}
+
+// Should result in the following request
+// "http://api.geonames.org/searchJSON?q=Stonehenge&maxRows=1000&startRow=50&lang=en&isNameRequired=true&style=FULL&username=unittest"
+//
+-(void) testSearchForStonehengeRow50 {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"Stonehenge50"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+	
+	// Perform code under test
+	[parser search:@"Stonehenge" maxRows:5000 startRow:50 language:nil];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNotNil(searchResult, @"Didn't expect an error");
+    STAssertEquals([searchResult count], 0U, @"Unexpected number of returned results");
+    STAssertEquals(totalFound, 33U, @"Unexpected number of total results");
+}
+
+
 
 @end
