@@ -31,6 +31,8 @@
 
 @protocol ILGeoNamesSearchControllerDelegate;
 
+/** The ILGeoNamesSearchController class creates a controller object that manages a table view with built-in support for searching for named locations from geonames.org.
+ */
 @interface ILGeoNamesSearchController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, ILGeoNamesLookupDelegate>
 {
 @private
@@ -39,15 +41,31 @@
 	ILGeoNamesLookup	*geoNamesSearch;
 }
 
+/** The delegate object you wish to receive the results. */
 @property(nonatomic, assign) id <ILGeoNamesSearchControllerDelegate> delegate;
 
 @end
 
 
+/** Protocol for the search controller to communicate with its delegate. */
 @protocol ILGeoNamesSearchControllerDelegate
 
 @required
+/** Called by the search controller to obtain the user ID for use in the search query
+ 
+ The delegate must return a string containing a valid user ID obtained from geonames.org.
+ @param controller The search controller.
+ @return The user ID.
+ */
 - (NSString*)geoNamesUserIDForSearchController:(ILGeoNamesSearchController*)controller;
+
+/** Called by the search controller when the user taps a search result or cancels the search.
+ 
+ When this method is called the geolocation selected by the user will be contained in _result_.
+ If the user taps the "Cancel" button the _result_ will be `nil`.
+ @param controller The search controller.
+ @param result The result of the user action.
+ */
 - (void)geoNamesSearchController:(ILGeoNamesSearchController*)controller didFinishWithResult:(NSDictionary*)result;
 
 @end
