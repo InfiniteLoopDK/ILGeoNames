@@ -6,6 +6,20 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6A67E0A11396991300F701EE /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6A67E0A41396991300F701EE /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				6A67E0A51396992600F701EE /* Build Documentation */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* SampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* SampleAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -294,6 +308,7 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* SampleApp */,
 				6A8D868C134E45340080FAE5 /* UnitTest */,
+				6A67E0A11396991300F701EE /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -329,6 +344,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6A67E0A51396992600F701EE /* Build Documentation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Documentation";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"ILGeoNames\" \\\n--project-company \"Infinite Loop\" \\\n--company-id dk.infinite-loop \\\n--output ~/help \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 2 \\\n--ignore .m \\\n--ignore UnitTest \\\n\"${PROJECT_DIR}/../Source\"";
+		};
 		6A8D868B134E45340080FAE5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -413,6 +442,20 @@
 				INFOPLIST_FILE = "SampleApp-Info.plist";
 				PRODUCT_NAME = SampleApp;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6A67E0A21396991300F701EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6A67E0A31396991300F701EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -515,6 +558,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6A67E0A41396991300F701EE /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A67E0A21396991300F701EE /* Debug */,
+				6A67E0A31396991300F701EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		6A8D869C134E45350080FAE5 /* Build configuration list for PBXNativeTarget "UnitTest" */ = {
 			isa = XCConfigurationList;
