@@ -51,7 +51,7 @@ For more information about ILGeoNames and how to use it, please visit http://www
 ### Building Xcode Documentation
 
 ILGeoNames is documented in the header files using the appledoc syntax. The SampleApp contains a target called "Documentation" which will build the documentation and install it for use inside Xcode as a searchable and browsable docset.
-In order to be able to build it you will need to install appledoc on your own computer. You can get docset from [GitHub](http://github.com/tomaz/appledoc.git).
+In order to be able to build it you will need to install appledoc on your own computer. You can get appledoc from [GitHub](http://github.com/tomaz/appledoc).
 For more information about how to setup and build the documentation you can read this [short tutorial](http://wp.me/p1xKtH-52).
 
 Feel free to add enhanchements, bug fixes, changes and provide them back to the community!
