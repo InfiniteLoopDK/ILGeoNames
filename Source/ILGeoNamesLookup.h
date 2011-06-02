@@ -30,9 +30,15 @@
 
 #import <Foundation/Foundation.h>
 
-// GeoNames error codes according to http://www.geonames.org/export/webservice-exception.html
-typedef enum {
+/** @name GeoNames error codes */
+
+/**
+ * Error codes returned by the geonames service according to http://www.geonames.org/export/webservice-exception.html 
+ */
+typedef enum GeoNamesError {
+    /** Authorization Exception */
 	kILGeoNamesAuthorizationExceptionError = 10,
+    /** record does not exist */
 	kILGeoNamesRecordDoesNotExistError = 11,
 	kILGeoNamesOtherError = 12,
 	kILGeoNamesDatabaseTimeoutError = 13,
@@ -52,6 +58,7 @@ extern NSString *const kILGeoNamesErrorDomain;
 
 @protocol ILGeoNamesLookupDelegate;
 
+/** Wrapper class for accessing the geonames.org services */
 @interface ILGeoNamesLookup : NSObject {
 	@private
     NSURLConnection		*dataConnection;
@@ -62,37 +69,73 @@ extern NSString *const kILGeoNamesErrorDomain;
 	
 }
 
+/** The delegate object you wish to receive the results. */
 @property (nonatomic, assign) id <ILGeoNamesLookupDelegate> delegate;
 
-// Initialize a new instance with the user ID obtained from Geonames.org
+/** Initialize a new instance with the user ID obtained from geonames.org 
+ 
+ The user ID provided in _userID_ will be used for all subsequent calls to the geonames.org services.
+ @param userID A user ID obtained from geonames.org.
+ */
 - (id)initWithUserID:(NSString*)userID;
 
-// Query the geonames.org service for the name of the place near the given position (WGS84)
+/** Query the geonames.org service for the name of the place near the given position (WGS84) 
+ 
+ @param latitude The latitude for the position.
+ @param longitude The longitude for the position.
+ */
 - (void)findNearbyPlaceNameForLatitude:(double)latitude longitude:(double)longitude;
 
-// Query the geonames.org service for a number of entries matching the query
+/** Query the geonames.org service for a number of geolocations matching the query 
+ 
+ Performs a search over all attributes of a place : place name, country name, continent, admin codes, etc.
+ It is possible to narrow a search by providing multiple terms separated by ',' in the _query_ parameter, e.g.:
+    "Berlin" will return all locations containing Berlin in any of the attributes.
+    "Berlin, hospital, wisconsin" will only return hospitals containing the name Berlin within the state of Wisconsin.
+ The number of returned results can be limited using the _maxRows_ parameter. By specifying an index in the _startRow_ parameter, it is possible to iterate over larger results in small steps.
+ 
+ @param query The search query.
+ @param maxRows The maximum number of results to return.
+ @param startRow The index of the first result to return.
+ @param langCode A 2-letter ISO-636 language code. Specifying `nil` will return the english names (default).
+ */
 - (void)search:(NSString*)query maxRows:(NSInteger)maxRows startRow:(NSUInteger)startRow language:(NSString*)langCode;
 
-// Cancel any outstanding request;
+/** Cancel any outstanding request */
 - (void)cancel;
 
 @end
 
-// Protocol for the parser to communicate with its delegate.
+/** Protocol for the ILGeoNamesLookup handler to communicate with its delegate. */
 @protocol ILGeoNamesLookupDelegate <NSObject>
 
 @optional
 
-// Called by the parser when starting and stopping network activity
+/** Called by the ILGeoNamesLookup handler when starting and stopping network activity.
+ 
+ @param handler The handler reporting the event.
+ @param isActive A boolean flag indicating whether network activity is about to start or stop.
+ */
 - (void)geoNamesLookup:(ILGeoNamesLookup *)handler networkIsActive:(BOOL)isActive;
-// Called by the parser in the case of an error.
+
+/** Called by the ILGeoNamesLookup handler in case of an error in one of the underlying services.
+ 
+ @param handler The handler reporting the event.
+ @param error The error object containing the reason why the request failed.
+ */
 - (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFailWithError:(NSError *)error;
-// Called by the parser when parsing is finished parsing current weather.
+
+/** Called by the ILGeoNamesLookup handler when the previous request have finished sucessfully.
+ 
+ @param handler The handler reporting the event.
+ @param geoNames An array containg the requested result.
+ @param total The total number of results available for the request.
+ */
 - (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFindGeoNames:(NSArray *)geoNames totalFound:(NSUInteger)total;
 
 @end
 
-// Keys used to parse the response from GeoNames services
+/// Keys used to parse the response from GeoNames services
 extern NSString *const kILGeoNamesResultsKey;
 extern NSString *const kILGeoNamesTotalResultsCountKey;
 
