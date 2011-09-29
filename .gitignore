@@ -12,5 +12,8 @@ xcuserdata
 # OS X noise
 .DS_Store
 
-# Ignore TouchJSON in this project - no need to confuse things
+# Ignore 3rd party libraries in this project - no need to confuse things
 TouchJSON
+OCMock
+JSONKit
+
