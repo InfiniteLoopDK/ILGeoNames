@@ -265,6 +265,38 @@
 }
 
 // Should result in the following request
+// "http://api.geonames.org/findNearbyJSON?lat=-33.92000000&lng=18.42000000&maxRows=5&radius=10.000&style=FULL&username=unittest"
+//
+- (void)testNearbyCapeTown {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"CapeTown"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+	
+	// Perform code under test
+	[parser findNearbyToponymsForLatitude:-33.92 longitude:18.42 maxRows:5 radius:10];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNotNil(searchResult, @"Didn't expect an error");
+    STAssertEquals(totalFound, 5U, @"Unexpected number of total results");
+	NSDictionary	*lastResult = [searchResult lastObject];
+	STAssertNotNil(lastResult, @"Expected at least one result");
+	STAssertEqualObjects([lastResult objectForKey:@"geonameId"], [NSNumber numberWithInt:6500970], @"Unexpected ID found");
+	STAssertEqualsWithAccuracy([[lastResult objectForKey:@"distance"] doubleValue], 0.34211, 0.00001, @"Unexpected distance found");
+	STAssertEqualObjects([lastResult objectForKey:@"name"], @"Tudor Hotel", @"Unexpected place name found");
+	STAssertEqualObjects([lastResult objectForKey:@"adminName1"], @"", @"Unexpected admin name found");
+	STAssertEqualObjects([lastResult objectForKey:@"countryCode"], @"ZA", @"Unexpected country code found");
+	STAssertEqualObjects([lastResult objectForKey:@"countryName"], @"South Africa", @"Unexpected country name found");
+	STAssertEqualObjects([lastResult objectForKey:@"continentCode"], @"AF", @"Unexpected continent code found");
+	NSDictionary *timezone = [lastResult objectForKey:@"timezone"];
+	STAssertNotNil(timezone, @"Expected time zone information");
+	STAssertEqualObjects([timezone objectForKey:@"gmtOffset"], [NSNumber numberWithInt:2], @"Unexpected GMT offset found");
+	STAssertEqualObjects([timezone objectForKey:@"timeZoneId"], @"Africa/Johannesburg", @"Unexpected time zone found");
+}
+
+// Should result in the following request
 // "http://api.geonames.org/searchJSON?q=Stonehenge&maxRows=5&startRow=0&lang=en&isNameRequired=true&style=FULL&username=unittest"
 //
 -(void) testSearchForStonehenge {

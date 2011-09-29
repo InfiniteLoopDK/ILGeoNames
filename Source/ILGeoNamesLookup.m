@@ -34,6 +34,7 @@
 #endif
 
 static NSString *kILGeoNamesFindNearbyURL = @"http://api.geonames.org/findNearbyJSON?lat=%.8f&lng=%.8f&style=FULL&username=%@";
+static NSString *kILGeoNamesFindNearbyToponymsURL = @"http://api.geonames.org/findNearbyJSON?lat=%.8f&lng=%.8f&maxRows=%d&radius=%.3f&style=FULL&username=%@";
 static NSString *kILGeoNamesSearchURL = @"http://api.geonames.org/searchJSON?q=%@&maxRows=%d&startRow=%d&lang=%@&isNameRequired=true&style=FULL&username=%@";
 
 NSString *const kILGeoNamesErrorDomain = @"org.geonames";
@@ -122,6 +123,14 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	
 	// Request formatted according to http://www.geonames.org/export/web-services.html#findNearby
 	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyURL, latitude, longitude, userID];
+    [self sendRequestWithURLString:urlString];
+}
+
+- (void)findNearbyToponymsForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius {
+	NSString	*urlString;
+	
+	// Request formatted according to http://www.geonames.org/export/web-services.html#findNearby
+	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyToponymsURL, latitude, longitude, maxRows, radius, userID];
     [self sendRequestWithURLString:urlString];
 }
 
@@ -218,7 +227,7 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	done = YES;
 	
     [self performSelectorOnMainThread:@selector(parseError:) withObject:error waitUntilDone:NO];
-    NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    //NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection

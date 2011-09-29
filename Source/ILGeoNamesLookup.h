@@ -86,6 +86,15 @@ extern NSString *const kILGeoNamesErrorDomain;
  */
 - (void)findNearbyPlaceNameForLatitude:(double)latitude longitude:(double)longitude;
 
+/** Query the geonames.org service for the nearby toponyms for the given position (WGS84) 
+ 
+ @param latitude The latitude for the position.
+ @param longitude The longitude for the position.
+ @param maxRows The maximum number of results to return.
+ @param radius The maximum search radius in km.
+ */
+- (void)findNearbyToponymsForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius;
+
 /** Query the geonames.org service for a number of geolocations matching the query 
  
  Performs a search over all attributes of a place : place name, country name, continent, admin codes, etc.
