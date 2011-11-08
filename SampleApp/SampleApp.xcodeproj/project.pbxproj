@@ -46,12 +46,11 @@
 		6AB8332D137213DF00057978 /* Stonehenge0.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AB8332B137213DF00057978 /* Stonehenge0.json */; };
 		6AB8332E137213DF00057978 /* Stonehenge50.json in Resources */ = {isa = PBXBuildFile; fileRef = 6AB8332C137213DF00057978 /* Stonehenge50.json */; };
 		6ABA4593143515FE008D05E6 /* CapeTown.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ABA4592143515FE008D05E6 /* CapeTown.json */; };
-		6ABA50DA136A09C900A1AFC3 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 6ABA50C0136A09C900A1AFC3 /* CHANGELOG.md */; };
 		6ABA50DB136A09C900A1AFC3 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA50C2136A09C900A1AFC3 /* JSONKit.m */; };
-		6ABA50DC136A09C900A1AFC3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6ABA50C3136A09C900A1AFC3 /* README.md */; };
 		6ABA50DD136A09E000A1AFC3 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA50C2136A09C900A1AFC3 /* JSONKit.m */; };
 		B90BD6011469AD4F00E163B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90BD6001469AD4F00E163B0 /* SenTestingKit.framework */; };
 		B90BD6421469B1E300E163B0 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B90BD5FA1469AC9F00E163B0 /* libOCMock.a */; };
+		B90BD6501469BCE500E163B0 /* WikipediaAppleHQ.json in Resources */ = {isa = PBXBuildFile; fileRef = B90BD64E1469B75400E163B0 /* WikipediaAppleHQ.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -136,6 +135,7 @@
 		8D1107310486CEB800E47090 /* SampleApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SampleApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		B90BD5EC1469AC9E00E163B0 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = ../../OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		B90BD6001469AD4F00E163B0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		B90BD64E1469B75400E163B0 /* WikipediaAppleHQ.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WikipediaAppleHQ.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +267,7 @@
 				6A4CF4781370CA2900D62EBB /* MalformedResponse.json */,
 				6AB8332B137213DF00057978 /* Stonehenge0.json */,
 				6AB8332C137213DF00057978 /* Stonehenge50.json */,
+				B90BD64E1469B75400E163B0 /* WikipediaAppleHQ.json */,
 				6A8D8693134E45350080FAE5 /* UnitTest-Info.plist */,
 				6A8D8694134E45350080FAE5 /* InfoPlist.strings */,
 				6A8D8697134E45350080FAE5 /* UnitTest-Prefix.pch */,
@@ -405,8 +406,6 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				6A577C7213132ADA00EE7428 /* ILGeoNames.strings in Resources */,
 				6A577C7513132ADE00EE7428 /* ILGeoNamesSearchController.xib in Resources */,
-				6ABA50DA136A09C900A1AFC3 /* CHANGELOG.md in Resources */,
-				6ABA50DC136A09C900A1AFC3 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +421,7 @@
 				6A4CF4791370CA2900D62EBB /* MalformedResponse.json in Resources */,
 				6AB8332D137213DF00057978 /* Stonehenge0.json in Resources */,
 				6AB8332E137213DF00057978 /* Stonehenge50.json in Resources */,
+				B90BD6501469BCE500E163B0 /* WikipediaAppleHQ.json in Resources */,
 				6ABA4593143515FE008D05E6 /* CapeTown.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
