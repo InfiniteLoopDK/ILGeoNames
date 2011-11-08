@@ -55,7 +55,7 @@
 /* Begin PBXBuildRule section */
 		6A14E432136F774000A1FFD8 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_2;
+			compilerSpec = com.apple.compilers.llvmgcc42;
 			fileType = sourcecode.c;
 			isEditable = 1;
 			outputFiles = (
@@ -432,7 +432,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SampleApp_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "SampleApp-Info.plist";
 				PRODUCT_NAME = SampleApp;
 			};
@@ -445,7 +444,6 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SampleApp_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "SampleApp-Info.plist";
 				PRODUCT_NAME = SampleApp;
 				VALIDATE_PRODUCT = YES;
@@ -485,7 +483,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-lgcov",
@@ -514,7 +511,6 @@
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREFIX_HEADER = "../Source/UnitTest/UnitTest-Prefix.pch";
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-lgcov",
