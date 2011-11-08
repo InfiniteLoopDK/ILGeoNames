@@ -318,12 +318,16 @@ NSString *const kILGeoNamesContinentCodeKey = @"continentCode";
 NSString *const kILGeoNamesCountryCodeKey = @"countryCode";
 NSString *const kILGeoNamesCountryNameKey = @"countryName";
 NSString *const kILGeoNamesPopulationKey = @"population";
+NSString *const kILGeoNamesTitleKey = @"title";
+NSString *const kILGeoNamesSummaryKey = @"summary";
+NSString *const kILGeoNamesWikipediaURLKey = @"wikipediaUrl";
 
 NSString *const kILGeoNamesAlternateNamesKey = @"alternameNames";
 NSString *const kILGeoNamesAlternateNameKey = @"name";
 NSString *const kILGeoNamesAlternateLanguageKey = @"lang";
 
 NSString *const kILGeoNamesIDKey = @"geonameId";
+NSString *const kILGeoNamesFeatureKey = @"feature";
 NSString *const kILGeoNamesFeatureClassKey = @"fcl";
 NSString *const kILGeoNamesFeatureCodeKey = @"fcode";
 NSString *const kILGeoNamesFeatureClassNameKey = @"fclName";
@@ -334,6 +338,8 @@ NSString *const kILGeoNamesLatitudeKey = @"lat";
 NSString *const kILGeoNamesLongitudeKey = @"lng";
 NSString *const kILGeoNamesDistanceKey = @"distance";
 NSString *const kILGeoNamesElevationKey = @"elevation";
+NSString *const kILGeoNamesLanguageKey = @"lang";
+NSString *const kILGeoNamesRankKey = @"rank";
 
 NSString *const kILGeoNamesTimeZoneInfoKey = @"timezone";
 NSString *const kILGeoNamesTimeZoneDSTOffsetKey = @"dstOffset";
