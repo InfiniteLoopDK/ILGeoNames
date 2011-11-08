@@ -35,6 +35,7 @@
 
 static NSString *kILGeoNamesFindNearbyURL = @"http://api.geonames.org/findNearbyJSON?lat=%.8f&lng=%.8f&style=FULL&username=%@";
 static NSString *kILGeoNamesFindNearbyToponymsURL = @"http://api.geonames.org/findNearbyJSON?lat=%.8f&lng=%.8f&maxRows=%d&radius=%.3f&style=FULL&username=%@";
+static NSString *kILGeoNamesFindNearbyWikipediaURL = @"http://api.geonames.org/findNearbyWikipediaJSON?lat=%.8f&lng=%.8f&maxRows=%d&radius=%.3f&style=FULL&username=%@&lang=%@";
 static NSString *kILGeoNamesSearchURL = @"http://api.geonames.org/searchJSON?q=%@&maxRows=%d&startRow=%d&lang=%@&isNameRequired=true&style=FULL&username=%@";
 
 NSString *const kILGeoNamesErrorDomain = @"org.geonames";
@@ -56,6 +57,7 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 
 @implementation ILGeoNamesLookup
 
+@synthesize userID;
 @synthesize done;
 @synthesize dataConnection;
 @synthesize dataBuffer;
@@ -131,6 +133,18 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	
 	// Request formatted according to http://www.geonames.org/export/web-services.html#findNearby
 	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyToponymsURL, latitude, longitude, maxRows, radius, userID];
+    [self sendRequestWithURLString:urlString];
+}
+
+- (void)findNearbyWikipediaForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius languageCode:(NSString *)languageCode {
+	NSString	*urlString;
+	
+	if ((! languageCode) || [languageCode length] == 0) {
+		languageCode = @"en";
+	}
+	
+	// Request formatted according to http://www.geonames.org/export/wikipedia-webservice.html#findNearbyWikipedia
+	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyWikipediaURL, latitude, longitude, maxRows, radius, userID, languageCode];
     [self sendRequestWithURLString:urlString];
 }
 

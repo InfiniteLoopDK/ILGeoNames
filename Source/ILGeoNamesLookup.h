@@ -72,6 +72,8 @@ extern NSString *const kILGeoNamesErrorDomain;
 /** The delegate object you wish to receive the results. */
 @property (nonatomic, assign) id <ILGeoNamesLookupDelegate> delegate;
 
+@property (nonatomic, copy) NSString *userID;
+
 /** Initialize a new instance with the user ID obtained from geonames.org 
  
  The user ID provided in _userID_ will be used for all subsequent calls to the geonames.org services.
@@ -94,6 +96,16 @@ extern NSString *const kILGeoNamesErrorDomain;
  @param radius The maximum search radius in km.
  */
 - (void)findNearbyToponymsForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius;
+
+/** Query the geonames.org service for the nearby Wikipedia articles for the given position (WGS84) 
+ 
+ @param latitude The latitude for the position.
+ @param longitude The longitude for the position.
+ @param maxRows The maximum number of results to return.
+ @param radius The maximum search radius in km.
+ @param languageCode language code, e.g. 'en'.
+ */
+- (void)findNearbyWikipediaForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius languageCode:(NSString *)languageCode;
 
 /** Query the geonames.org service for a number of geolocations matching the query 
  
