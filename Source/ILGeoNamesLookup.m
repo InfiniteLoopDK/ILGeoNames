@@ -35,6 +35,7 @@
 
 static NSString *kILGeoNamesFindNearbyURL = @"http://api.geonames.org/findNearbyJSON?lat=%.8f&lng=%.8f&style=FULL&username=%@";
 static NSString *kILGeoNamesFindNearbyToponymsURL = @"http://api.geonames.org/findNearbyJSON?lat=%.8f&lng=%.8f&maxRows=%d&radius=%.3f&style=FULL&username=%@";
+static NSString *kILGeoNamesFindNearbyWikipediaURL = @"http://api.geonames.org/findNearbyWikipediaJSON?lat=%.8f&lng=%.8f&maxRows=%d&radius=%.3f&style=FULL&username=%@&lang=%@";
 static NSString *kILGeoNamesSearchURL = @"http://api.geonames.org/searchJSON?q=%@&maxRows=%d&startRow=%d&lang=%@&isNameRequired=true&style=FULL&username=%@";
 
 NSString *const kILGeoNamesErrorDomain = @"org.geonames";
@@ -56,6 +57,7 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 
 @implementation ILGeoNamesLookup
 
+@synthesize userID;
 @synthesize done;
 @synthesize dataConnection;
 @synthesize dataBuffer;
@@ -131,6 +133,18 @@ NSString *const kILGeoNamesErrorDomain = @"org.geonames";
 	
 	// Request formatted according to http://www.geonames.org/export/web-services.html#findNearby
 	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyToponymsURL, latitude, longitude, maxRows, radius, userID];
+    [self sendRequestWithURLString:urlString];
+}
+
+- (void)findNearbyWikipediaForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius languageCode:(NSString *)languageCode {
+	NSString	*urlString;
+	
+	if ((! languageCode) || [languageCode length] == 0) {
+		languageCode = @"en";
+	}
+	
+	// Request formatted according to http://www.geonames.org/export/wikipedia-webservice.html#findNearbyWikipedia
+	urlString = [NSString stringWithFormat:kILGeoNamesFindNearbyWikipediaURL, latitude, longitude, maxRows, radius, userID, languageCode];
     [self sendRequestWithURLString:urlString];
 }
 
@@ -304,12 +318,16 @@ NSString *const kILGeoNamesContinentCodeKey = @"continentCode";
 NSString *const kILGeoNamesCountryCodeKey = @"countryCode";
 NSString *const kILGeoNamesCountryNameKey = @"countryName";
 NSString *const kILGeoNamesPopulationKey = @"population";
+NSString *const kILGeoNamesTitleKey = @"title";
+NSString *const kILGeoNamesSummaryKey = @"summary";
+NSString *const kILGeoNamesWikipediaURLKey = @"wikipediaUrl";
 
 NSString *const kILGeoNamesAlternateNamesKey = @"alternameNames";
 NSString *const kILGeoNamesAlternateNameKey = @"name";
 NSString *const kILGeoNamesAlternateLanguageKey = @"lang";
 
 NSString *const kILGeoNamesIDKey = @"geonameId";
+NSString *const kILGeoNamesFeatureKey = @"feature";
 NSString *const kILGeoNamesFeatureClassKey = @"fcl";
 NSString *const kILGeoNamesFeatureCodeKey = @"fcode";
 NSString *const kILGeoNamesFeatureClassNameKey = @"fclName";
@@ -320,6 +338,8 @@ NSString *const kILGeoNamesLatitudeKey = @"lat";
 NSString *const kILGeoNamesLongitudeKey = @"lng";
 NSString *const kILGeoNamesDistanceKey = @"distance";
 NSString *const kILGeoNamesElevationKey = @"elevation";
+NSString *const kILGeoNamesLanguageKey = @"lang";
+NSString *const kILGeoNamesRankKey = @"rank";
 
 NSString *const kILGeoNamesTimeZoneInfoKey = @"timezone";
 NSString *const kILGeoNamesTimeZoneDSTOffsetKey = @"dstOffset";

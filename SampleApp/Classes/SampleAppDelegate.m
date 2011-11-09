@@ -41,8 +41,10 @@ static NSString *kGeoNamesAccountName = @"ilgeonamessample";
 @synthesize locationName;
 @synthesize locationType;
 @synthesize country;
+@synthesize wikipediaArticles;
 @synthesize locationManager;
 @synthesize geocoder;
+@synthesize wikipediaGeocoder;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -144,6 +146,10 @@ static NSString *kGeoNamesAccountName = @"ilgeonamessample";
 	geocoder.delegate = self;
 	[geocoder findNearbyPlaceNameForLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
 	
+	// Request a list of nearby Wikipedia articles from geonames.org
+	self.wikipediaGeocoder = [[[ILGeoNamesLookup alloc] initWithUserID:kGeoNamesAccountName] autorelease];
+	wikipediaGeocoder.delegate = self;
+	[wikipediaGeocoder findNearbyWikipediaForLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude maxRows:50 radius:20 languageCode:@"en"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -173,10 +179,29 @@ static NSString *kGeoNamesAccountName = @"ilgeonamessample";
 
 - (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFindGeoNames:(NSArray *)geoNames totalFound:(NSUInteger)total
 {
+	if (handler == geocoder) {
+		[self didFindNearbyPlaceName:geoNames totalFound:total];
+	} else if (handler == wikipediaGeocoder) {
+		[self didFindNearbyWikipediaArticles:geoNames totalFound:total];
+	}
+	
+}
+
+- (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFailWithError:(NSError *)error
+{
+	// TODO error handling
+    NSLog(@"ILGeoNamesLookup has failed: %@", [error localizedDescription]);
+	self.locationName.text = @"Unknown location";
+}
+
+#pragma mark Two non-protocol outcomes for geonames searcher
+
+- (void)didFindNearbyPlaceName:(NSArray *)geoNames totalFound:(NSUInteger)total {
+	
 	BOOL		gotGeocode = NO;
 	NSString	*name;
 	
-	NSLog(@"didFindGeoNames: %@", [geoNames description]);
+	NSLog(@"didFindGeoNames (nearby place name): %@", [geoNames description]);
 	
 	// Grab the name of the first place
 	if (geoNames && [geoNames count] >= 1) {
@@ -197,11 +222,27 @@ static NSString *kGeoNamesAccountName = @"ilgeonamessample";
 	}
 }
 
-- (void)geoNamesLookup:(ILGeoNamesLookup *)handler didFailWithError:(NSError *)error
-{
-	// TODO error handling
-    NSLog(@"ILGeoNamesLookup has failed: %@", [error localizedDescription]);
-	self.locationName.text = @"Unknown location";
+- (void)didFindNearbyWikipediaArticles:(NSArray *)geoNames totalFound:(NSUInteger)total {
+
+	NSLog(@"didFindGeoNames (Wikipedia's nearby articles): %@", [geoNames description]);
+	
+	NSMutableString *result = [NSMutableString stringWithString:@""];
+	
+	if (geoNames && [geoNames count] > 0) {
+		
+		for (NSDictionary *geoName in geoNames) {
+			[result appendFormat:@"%@ (distance: %@)\n",
+			 [geoName objectForKey:kILGeoNamesTitleKey],
+			 [geoName objectForKey:kILGeoNamesDistanceKey]];
+		}
+	}
+	
+	if ([result length] > 0) {
+		[wikipediaArticles setText:[NSString stringWithString:result]];
+	} else {
+		[wikipediaArticles setText:@"No Wikipedia articles"];
+	}
+	
 }
 
 

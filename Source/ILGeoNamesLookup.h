@@ -72,6 +72,8 @@ extern NSString *const kILGeoNamesErrorDomain;
 /** The delegate object you wish to receive the results. */
 @property (nonatomic, assign) id <ILGeoNamesLookupDelegate> delegate;
 
+@property (nonatomic, copy) NSString *userID;
+
 /** Initialize a new instance with the user ID obtained from geonames.org 
  
  The user ID provided in _userID_ will be used for all subsequent calls to the geonames.org services.
@@ -94,6 +96,16 @@ extern NSString *const kILGeoNamesErrorDomain;
  @param radius The maximum search radius in km.
  */
 - (void)findNearbyToponymsForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius;
+
+/** Query the geonames.org service for the nearby Wikipedia articles for the given position (WGS84) 
+ 
+ @param latitude The latitude for the position.
+ @param longitude The longitude for the position.
+ @param maxRows The maximum number of results to return.
+ @param radius The maximum search radius in km.
+ @param languageCode language code, e.g. 'en'.
+ */
+- (void)findNearbyWikipediaForLatitude:(double)latitude longitude:(double)longitude maxRows:(NSInteger)maxRows radius:(double)radius languageCode:(NSString *)languageCode;
 
 /** Query the geonames.org service for a number of geolocations matching the query 
  
@@ -161,12 +173,16 @@ extern NSString *const kILGeoNamesContinentCodeKey;
 extern NSString *const kILGeoNamesCountryCodeKey;
 extern NSString *const kILGeoNamesCountryNameKey;
 extern NSString *const kILGeoNamesPopulationKey;
+extern NSString *const kILGeoNamesTitleKey;			// Wikipedia requests only
+extern NSString *const kILGeoNamesSummaryKey;		// Wikipedia requests only
+extern NSString *const kILGeoNamesWikipediaURLKey;	// Wikipedia requests only
 
 extern NSString *const kILGeoNamesAlternateNamesKey;
 extern NSString *const kILGeoNamesAlternateNameKey;
 extern NSString *const kILGeoNamesAlternateLanguageKey;
 
 extern NSString *const kILGeoNamesIDKey;
+extern NSString *const kILGeoNamesFeatureKey;	// Wikipedia requests only
 extern NSString *const kILGeoNamesFeatureClassKey;
 extern NSString *const kILGeoNamesFeatureCodeKey;
 extern NSString *const kILGeoNamesFeatureClassNameKey;
@@ -177,6 +193,8 @@ extern NSString *const kILGeoNamesLatitudeKey;
 extern NSString *const kILGeoNamesLongitudeKey;
 extern NSString *const kILGeoNamesDistanceKey;
 extern NSString *const kILGeoNamesElevationKey;
+extern NSString *const kILGeoNamesLanguageKey;	// Wikipedia requests only
+extern NSString *const kILGeoNamesRankKey;		// Wikipedia requests only
 
 extern NSString *const kILGeoNamesTimeZoneInfoKey;
 extern NSString *const kILGeoNamesTimeZoneDSTOffsetKey;
@@ -187,3 +205,15 @@ extern NSString *const kILGeoNamesErrorResponseKey;
 extern NSString *const kILGeoNamesErrorMessageKey;
 extern NSString *const kILGeoNamesErrorCodeKey;
 
+/// Keys used to parse the response from GeoNames services when requesting nearby Wikipedia articles
+// kILGeoNamesCountryCodeKey
+// kILGeoNamesDistanceKey
+// kILGeoNamesElevationKey
+// kILGeoNamesFeatureKey
+// kILGeoNamesLanguageKey
+// kILGeoNamesLatitudeKey
+// kILGeoNamesLongitudeKey
+// kILGeoNamesRankKey
+// kILGeoNamesSummaryKey
+// kILGeoNamesTitleKey
+// kILGeoNamesWikipediaURLKey

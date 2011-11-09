@@ -83,9 +83,15 @@
         STAssertTrue([[params objectAtIndex:0] hasPrefix:@"q="], @"query not set correctly in request");
         STAssertTrue([[params objectAtIndex:1] hasPrefix:@"maxRows="], @"maxRows not set correctly in request");
         STAssertTrue([[params objectAtIndex:2] hasPrefix:@"startRow="], @"startRow not set correctly in request");
-        STAssertTrue([params containsObject:@"lang=en"], @"laguage not set correctly in request");
+        STAssertTrue([params containsObject:@"lang=en"], @"language not set correctly in request");
         STAssertTrue([params containsObject:@"isNameRequired=true"], @"isNameRequired not set correctly in request");
     }
+	else if ([[url path] isEqualToString:@"/findNearbyWikipediaJSON"]) {
+        STAssertTrue([[params objectAtIndex:0] hasPrefix:@"lat="], @"latitude not set correctly in request");
+        STAssertTrue([[params objectAtIndex:1] hasPrefix:@"lng="], @"longitude not set correctly in request");
+        STAssertTrue([[params objectAtIndex:2] hasPrefix:@"maxRows="], @"maxRows not set correctly in request");
+        STAssertTrue([[params objectAtIndex:3] hasPrefix:@"radius="], @"radius not set correctly in request");
+	}
     else
         STFail(@"Invalid request: %@",[url path]);
 	
@@ -131,6 +137,9 @@
 	
 	return done;
 }
+
+
+#pragma mark - findNearbyPlaceNameForLatitude:longitude: tests
 
 // Should result in the following request
 // "http://api.geonames.org/findNearbyJSON?lat=-10.00000000&lng=-10.00000000&style=FULL&username=unittest"
@@ -349,6 +358,77 @@
     STAssertEquals(totalFound, 33U, @"Unexpected number of total results");
 }
 
+
+#pragma mark - Wikipedia tests
+
+- (void) testWikipediaMiddleOfNowhere {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"MiddleOfNowhere"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+                       onObject:self] sendRequestWithURLString:[OCMArg any]];
+    
+	// Perform code under test
+	[parser findNearbyWikipediaForLatitude:-10.0 longitude:-10.0 maxRows:20 radius:20 languageCode:@"en"];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNotNil(searchResult, @"Didn't expect an error");
+	STAssertEquals([searchResult count], (NSUInteger)0, @"Should not find any results in the middle of nowhere: %@", searchResult);
+    STAssertEquals(totalFound, 0U, @"Unexpected number of total results");
+}
+
+- (void) testWikipediaInvalidPosition {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"InvalidPosition"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+	
+	// Perform code under test
+	[parser findNearbyWikipediaForLatitude:-100.0 longitude:-10.0 maxRows:20 radius:20 languageCode:@"en"];
+	
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNil(searchResult, @"Should not find any results for invalid position: %@", searchResult);
+	STAssertNotNil(searchError, @"Expected an error");
+	STAssertEqualObjects([searchError domain], kILGeoNamesErrorDomain, @"Unexpected error domain");
+	STAssertEquals([searchError code], kILGeoNamesOtherError, @"Unexpected error code");
+}
+
+// Should result in the following request
+// "http://api.geonames.org/findNearbyWikipediaJSON?lat=37.3316414613743&lng=-122.030189037323&maxRows=20&radius=30&style=FULL&username=unittest&lang=en"
+//
+-(void) testWikipediaAllPossibleKeys {
+	// Mock the ILGeoNamesLookup so no actual network access is performed
+	[self loadCannedResultWithName:@"WikipediaAppleHQ"];
+	mockParser = [OCMockObject partialMockForObject:parser];
+	[[[mockParser stub] andCall:@selector(returnCannedResultForRequest:)
+					   onObject:self] sendRequestWithURLString:[OCMArg any]];
+	
+	// Perform code under test (searching near Apple HQ)
+	[parser findNearbyWikipediaForLatitude:37.3316414613743
+								 longitude:-122.030189037323
+								   maxRows:20
+									radius:20
+							  languageCode:@"en"];
+		
+	// Validate result
+	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
+	STAssertNotNil(searchResult, @"Didn't expect an error");
+	NSDictionary	*firstResult = [searchResult objectAtIndex:0];
+	STAssertNotNil(firstResult, @"Expected at least one result");
+	STAssertEqualObjects([firstResult objectForKey:kILGeoNamesCountryCodeKey], @"US", @"Unexpected countryCode");
+	STAssertEqualObjects([firstResult objectForKey:kILGeoNamesDistanceKey], @"0.057", @"Unexpected distance");
+	STAssertEquals([[firstResult objectForKey:kILGeoNamesElevationKey] intValue], 69, @"Unexpected elevation");
+	STAssertEqualObjects([firstResult objectForKey:kILGeoNamesLanguageKey], @"en", @"Unexpected language");
+	STAssertTrue([[firstResult objectForKey:kILGeoNamesLatitudeKey] isKindOfClass:[NSNumber class]], @"Unexpected latitude");
+	STAssertTrue([[firstResult objectForKey:kILGeoNamesLongitudeKey] isKindOfClass:[NSNumber class]], @"Unexpected longitude");
+	STAssertEquals([[firstResult objectForKey:kILGeoNamesRankKey] intValue], 98, @"Unexpected rank");
+	STAssertEqualObjects([firstResult objectForKey:kILGeoNamesSummaryKey], @"Apple Inc. (; ; previously Apple Computer, Inc.) is an American multinational corporation that designs and markets consumer electronics, computer software, and personal computers. The company's best-known hardware products include the Macintosh line of computers, the iPod, the iPhone and the iPad (...)", @"Unexpected summary");
+	STAssertEqualObjects([firstResult objectForKey:kILGeoNamesTitleKey], @"Apple Inc.", @"Unexpected title");
+	STAssertEqualObjects([firstResult objectForKey:kILGeoNamesWikipediaURLKey], @"en.wikipedia.org/wiki/Apple_Inc.", @"Unexpected wikipediaUrl");
+}
 
 
 @end

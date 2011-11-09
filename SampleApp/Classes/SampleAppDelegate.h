@@ -37,6 +37,7 @@
     UIWindow *window;
     CLLocationManager	*locationManager;
 	ILGeoNamesLookup	*geocoder;
+	ILGeoNamesLookup	*wikipediaGeocoder;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -47,11 +48,16 @@
 @property (nonatomic, retain) IBOutlet UILabel *locationName;
 @property (nonatomic, retain) IBOutlet UILabel *locationType;
 @property (nonatomic, retain) IBOutlet UILabel *country;
+@property (nonatomic, retain) IBOutlet UITextView *wikipediaArticles;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) ILGeoNamesLookup *geocoder;
+@property (nonatomic, retain) ILGeoNamesLookup *wikipediaGeocoder;
 
 - (IBAction)currentPosition:(id)sender;
 - (IBAction)searchLocation:(id)sender;
+
+- (void)didFindNearbyPlaceName:(NSArray *)geoNames totalFound:(NSUInteger)total;
+- (void)didFindNearbyWikipediaArticles:(NSArray *)geoNames totalFound:(NSUInteger)total;
 
 @end
 
