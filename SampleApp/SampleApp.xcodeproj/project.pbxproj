@@ -519,10 +519,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SampleApp_Prefix.pch;
-<<<<<<< HEAD
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-=======
->>>>>>> 0145310ddd6f909237992fdd7d906e8894c2ad38
 				INFOPLIST_FILE = "SampleApp-Info.plist";
 				PRODUCT_NAME = SampleApp;
 			};
@@ -534,10 +531,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SampleApp_Prefix.pch;
-<<<<<<< HEAD
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-=======
->>>>>>> 0145310ddd6f909237992fdd7d906e8894c2ad38
 				INFOPLIST_FILE = "SampleApp-Info.plist";
 				PRODUCT_NAME = SampleApp;
 				VALIDATE_PRODUCT = YES;
@@ -582,7 +576,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -606,7 +599,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;

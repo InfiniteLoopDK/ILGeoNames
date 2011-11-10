@@ -32,6 +32,10 @@
 @interface ILGeoNamesLookup(SuppressWarnings)
 @property (nonatomic, retain) NSMutableData *dataBuffer;
 - (void)sendRequestWithURLString:(NSString*)urlString;
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 @end
 
 @implementation ILGeoNamesLookupTest
@@ -397,7 +401,7 @@
 }
 
 // Should result in the following request
-// "http://api.geonames.org/findNearbyWikipediaJSON?lat=37.3316414613743&lng=-122.030189037323&maxRows=20&radius=30&style=FULL&username=unittest&lang=en"
+// "http://api.geonames.org/findNearbyWikipediaJSON?lat=37.3316414613743&lng=-122.030189037323&maxRows=20&radius=20&style=FULL&username=unittest&lang=en"
 //
 -(void) testWikipediaAllPossibleKeys {
 	// Mock the ILGeoNamesLookup so no actual network access is performed
@@ -416,6 +420,7 @@
 	// Validate result
 	STAssertTrue([self waitForCompletion:3.0], @"Failed to get any results in time");
 	STAssertNotNil(searchResult, @"Didn't expect an error");
+    STAssertEquals(totalFound, 20U, @"Unexpected number of total results");
 	NSDictionary	*firstResult = [searchResult objectAtIndex:0];
 	STAssertNotNil(firstResult, @"Expected at least one result");
 	STAssertEqualObjects([firstResult objectForKey:kILGeoNamesCountryCodeKey], @"US", @"Unexpected countryCode");
