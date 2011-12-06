@@ -48,21 +48,11 @@
 		6ABA4593143515FE008D05E6 /* CapeTown.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ABA4592143515FE008D05E6 /* CapeTown.json */; };
 		6ABA50DB136A09C900A1AFC3 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA50C2136A09C900A1AFC3 /* JSONKit.m */; };
 		6ABA50DD136A09E000A1AFC3 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABA50C2136A09C900A1AFC3 /* JSONKit.m */; };
+		6ACAE826148D95B70069D357 /* libprofile_rt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACAE825148D95B70069D357 /* libprofile_rt.dylib */; };
 		B90BD6011469AD4F00E163B0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B90BD6001469AD4F00E163B0 /* SenTestingKit.framework */; };
 		B90BD6421469B1E300E163B0 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B90BD5FA1469AC9F00E163B0 /* libOCMock.a */; };
 		B90BD6501469BCE500E163B0 /* WikipediaAppleHQ.json in Resources */ = {isa = PBXBuildFile; fileRef = B90BD64E1469B75400E163B0 /* WikipediaAppleHQ.json */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXBuildRule section */
-		6A14E432136F774000A1FFD8 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.llvmgcc42;
-			fileType = sourcecode.c;
-			isEditable = 1;
-			outputFiles = (
-			);
-		};
-/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		B90BD5F51469AC9F00E163B0 /* PBXContainerItemProxy */ = {
@@ -132,6 +122,7 @@
 		6ABA50C1136A09C900A1AFC3 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		6ABA50C2136A09C900A1AFC3 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		6ABA50C3136A09C900A1AFC3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6ACAE825148D95B70069D357 /* libprofile_rt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libprofile_rt.dylib; path = usr/lib/libprofile_rt.dylib; sourceTree = DEVELOPER_DIR; };
 		8D1107310486CEB800E47090 /* SampleApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SampleApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		B90BD5EC1469AC9E00E163B0 /* OCMock.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCMock.xcodeproj; path = ../../OCMock/Source/OCMock.xcodeproj; sourceTree = "<group>"; };
 		B90BD6001469AD4F00E163B0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -154,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ACAE826148D95B70069D357 /* libprofile_rt.dylib in Frameworks */,
 				B90BD6421469B1E300E163B0 /* libOCMock.a in Frameworks */,
 				B90BD6011469AD4F00E163B0 /* SenTestingKit.framework in Frameworks */,
 				6A8D868E134E45350080FAE5 /* UIKit.framework in Frameworks */,
@@ -226,6 +218,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				6A577BC31312F48700EE7428 /* CoreLocation.framework */,
+				6ACAE825148D95B70069D357 /* libprofile_rt.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -327,7 +320,6 @@
 				6A8D868B134E45340080FAE5 /* ShellScript */,
 			);
 			buildRules = (
-				6A14E432136F774000A1FFD8 /* PBXBuildRule */,
 			);
 			dependencies = (
 				B90BD5FF1469ACBF00E163B0 /* PBXTargetDependency */,
@@ -565,16 +557,15 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "../Source/UnitTest/UnitTest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../OCMock/Source/";
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
-				OTHER_LDFLAGS = (
-					"-lgcov",
-					"-ObjC",
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/usr/lib\"",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -594,10 +585,11 @@
 				GCC_PREFIX_HEADER = "../Source/UnitTest/UnitTest-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../OCMock/Source/";
 				INFOPLIST_FILE = "../Source/UnitTest/UnitTest-Info.plist";
-				OTHER_LDFLAGS = (
-					"-lgcov",
-					"-ObjC",
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_DIR)/usr/lib\"",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -612,6 +604,7 @@
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = iphoneos;
